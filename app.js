@@ -1,7 +1,33 @@
 var Crawler = require("simplecrawler");
+
+const fs = require('fs');
+
+/**
+ * sample usage:
+ *
+ *
+ * @param filePath
+ * @param data
+ */
+var logToFile = (filePath, data)=>{
+	let writeStream = fs.createWriteStream(filePath);
+
+	writeStream.write(data);
+
+	writeStream.on('finish', () => {
+		console.log('wrote all data to file');
+	});
+
+	writeStream.end();
+};
+
 var i = 0;
 
 var crawler = Crawler("https://help.sap.com/http.svc/rc/saphelp_glossary/latest/en-US/35/2cd77bd7705394e10000009b387c12/frameset.htm");
+//var crawler =
+	//Crawler("https://help.sap.com/http.svc/rc/saphelp_glossary/latest/en-US/8a/02cb8a77ddd31184080004aca6e0d1/content.htm");
+  // Crawler("https://help.sap.com/http.svc/rc/saphelp_glossary/latest/en-US/ac/7a154f6a074247b44223809242eed5/content.htm");
+
 
 crawler.on("fetchcomplete", function(queueItem, responseBuffer, response) {
 //	console.log("I just received %s (%d bytes)", queueItem.url, responseBuffer.length);
@@ -36,8 +62,9 @@ crawler.start();
 
 
 var processTerm = (html) => {
-	var termRecord = {};
-	console.log(html);
+	var termRecord = {
+		definition: ''
+	};
 	const td = '<TD><FONT FACE="Arial" COLOR="#FEFEEE" SIZE="5">';
 	const tdStart = html.indexOf(td)>-1 ? html.indexOf(td)+ td.length +1: -1;
 
@@ -58,24 +85,33 @@ var processTerm = (html) => {
 		termRecord.term = h3Text;
 	}
 
-
-	const p1 = '<P><FONT FACE="Arial" SIZE=2>';
-	const p1Start = html.indexOf(p1)>-1?html.indexOf(p1) + p1.length: -1;
-	const p1End =  html.indexOf('</FONT></P>');
-	if(p1Start>-1 && p1Start>p1End){
-		const len =  p1End - p1Start;
-		termRecord.shortDefinition  = html.substr(p1Start,len);
-	}
+  processPTags(html,termRecord);
 
 
-	const p2 = '<P><FONT FACE="Arial" SIZE=2>';
-	const p2Start = html.indexOf(p1End,p2)>-1?html.indexOf(p1End,p2) + p1.length: -1;
-	const p2End =  html.indexOf(p1End + '</FONT></P>'.length,'</FONT></P>');
-	if(p2Start>-1 && p2Start>p2End){
-		const len =  p2End - p2Start;
-		termRecord.longDefinition  = html.substr(p2Start,len);
-	}
-
-	console.log('term record', termRecord);
+	logToFile('/Users/franklinparker/temp/sapTerms.json',
+		JSON.stringify(termRecord,null,2));
+	console.log('term record using pTag\n'+ JSON.stringify(termRecord,null,2));
 
 };
+
+
+var processPTags = (html, termRecord)=>{
+	var start = 0;
+
+	while(start != -1) {
+		const p2 = '<P><FONT FACE="Arial" SIZE=2>';
+		const p2Start = html.indexOf(p2, start) > -1 ? html.indexOf(p2, start) + p2.length : -1;
+		const p2End = html.indexOf('</FONT></P>', start + p2.length);
+
+		if (p2Start > -1 && p2End > p2Start) {
+			const len = p2End - p2Start;
+			termRecord.definition += html.substr(p2Start, len);
+			start = p2End;
+		}else{
+			start = -1;
+		}
+	}
+
+
+
+}
