@@ -24,40 +24,29 @@ var logToFile = (data) => {
 	// writeStream.end();
 };
 
-var i = 0;
+let count = 0;
 
 //let crawler = Crawler("https://help.sap.com/http.svc/rc/saphelp_glossary/latest/en-US/35/2cd77bd7705394e10000009b387c12/frameset.htm");
-var crawler =
-Crawler("https://help.sap.com/http.svc/rc/saphelp_glossary/latest/en-US/8a/02cb8a77ddd31184080004aca6e0d1/content.htm");
+var crawler = Crawler("https://help.sap.com/http.svc/rc/saphelp_glossary/latest/en-US/8a/02cb8a77ddd31184080004aca6e0d1/content.htm");
 // Crawler("https://help.sap.com/http.svc/rc/saphelp_glossary/latest/en-US/ac/7a154f6a074247b44223809242eed5/content.htm");
+const matchUrl = 'https://help.sap.com/http.svc/rc/saphelp_glossary/latest/en-US';
 
 
 crawler.on("fetchcomplete", function (queueItem, responseBuffer, response) {
-//	console.log("I just received %s (%d bytes)", queueItem.url, responseBuffer.length);
-//	console.log("It was a resource of type %s", response.headers['content-type']);
-//
-	const startUrl = 'https://help.sap.com/http.svc/rc/saphelp_glossary/latest/en-US';
-	// if(queueItem.url===
-	// 		'https://help.sap.com/http.svc/rc/saphelp_glossary/latest/en-US/46/3cf388e6da51cae10000000a1553ed/content.htm0'){
-	// 	console.log(responseBuffer);
-	//
-	//
-	// }
-	if (queueItem.url.substr(0, startUrl.length) === startUrl &&
+
+
+	if (queueItem.url.substr(0, matchUrl.length) === matchUrl &&
 		queueItem.url.indexOf('content.htm') != -1
 		&& responseBuffer.toString().indexOf('<P><FONT FACE=') != -1) {
 		console.log(queueItem.url);
-		i++;
+		count++;
 		processTerm(responseBuffer.toString());
 	}
-	if (i === 100) {
+	if (count === 300) {
 		logToFile(JSON.stringify(sapGlosRecords, null, 2));
 		process.exit(0);
 
 	}
-	// }
-	// 'https://help.sap.com/http.svc/rc/saphelp_glossary/latest/en-US/46/3cf388e6da51cae10000000a1553ed/content.htm0'){
-	// console.log(responseBuffer);
 
 
 });
@@ -91,8 +80,7 @@ var processTerm = (html) => {
 	processPTags(html, termRecord);
 
 	sapGlosRecords.push(termRecord);
-	// logToFile(
-	// 	JSON.stringify(termRecord,null,2));
+
 	console.log(JSON.stringify(termRecord, null, 2));
 
 };
@@ -100,6 +88,7 @@ var processTerm = (html) => {
 
 var processPTags = (html, termRecord) => {
 	var start = 0;
+	termRecord.text ='';
 
 	while (start != -1) {
 		const p2 = '<P><FONT FACE="Arial" SIZE=2>';
@@ -122,7 +111,6 @@ var getSoftwareComponent = (h3txt)=> {
 		let start = h3txt.indexOf('(') + 1;
 		let end = h3txt.indexOf(')');
 		let sfComp = h3txt.substr(start , (end - start));
-		console.log('sfCmo:' + sfComp);
 		return sfComp;
 
 }
