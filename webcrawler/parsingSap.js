@@ -2,8 +2,10 @@
 const fs = require('fs');
 
 
-var processTerm = (html,sapGlosRecords) => {
-	var termRecord = {};
+var processSapTerm = (html,sapGlosRecords, url) => {
+	var termRecord = {
+		url: url
+	};
 	const td = '<TD><FONT FACE="Arial" COLOR="#FEFEEE" SIZE="5">';
 	const tdStart = html.indexOf(td) > -1 ? html.indexOf(td) + td.length + 1 : -1;
 
@@ -11,6 +13,7 @@ var processTerm = (html,sapGlosRecords) => {
 	const h3 = '<H3>';
 	const h3Start = html.indexOf(h3) > -1 ? html.indexOf(h3) + 4 : -1;
 	const h3End = html.indexOf('(', h3Start);
+
 	if (h3Start > -1 && h3End > h3Start) {
 
 		const h3Len = h3End - h3Start;
@@ -58,5 +61,5 @@ var getSoftwareComponent = (h3txt) => {
 }
 
 module.exports.htmlParser ={
-	processTerm
+	processSapTerm
 }

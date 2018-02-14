@@ -1,5 +1,5 @@
 var Crawler = require("simplecrawler");
-const htmlParser = require('./webcrawler/parsing').htmlParser;
+const htmlParser = require('./webcrawler/parsingSap').htmlParser;
 const fs = require('fs');
 
 const sapGlosRecords = [];
@@ -42,7 +42,7 @@ crawler.on("fetchcomplete", function (queueItem, responseBuffer, response) {
 		} else {
 			processedUrls.push(queueItem.url);
 			count++;
-			htmlParser.processTerm(responseBuffer.toString(), sapGlosRecords);
+			htmlParser.processSapTerm(responseBuffer.toString(), sapGlosRecords, queueItem.url);
 			console.log('processing url:' + queueItem.url + ': processed Count:' + count);
 
 		}
