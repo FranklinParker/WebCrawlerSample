@@ -2,6 +2,9 @@ var Crawler = require("simplecrawler");
 
 const fs = require('fs');
 
+const sapGlosRecords = [];
+
+
 /**
  * sample usage:
  *
@@ -9,27 +12,27 @@ const fs = require('fs');
  * @param filePath
  * @param data
  */
-var logToFile = (filePath, data)=>{
-	let writeStream = fs.createWriteStream(filePath);
-
-	writeStream.write(data);
-
-	writeStream.on('finish', () => {
-		console.log('wrote all data to file');
-	});
-
-	writeStream.end();
+var logToFile = (data) => {
+	//let writeStream = fs.createWriteStream('/Users/franklinparker/temp/sapTerms.json');
+	fs.writeFileSync('/Users/franklinparker/temp/sapTerms.json', data);
+	// writeStream.write(data);
+	//
+	// writeStream.on('finish', () => {
+	// 	console.log('wrote all data to file');
+	// });
+	//
+	// writeStream.end();
 };
 
 var i = 0;
 
-var crawler = Crawler("https://help.sap.com/http.svc/rc/saphelp_glossary/latest/en-US/35/2cd77bd7705394e10000009b387c12/frameset.htm");
-//var crawler =
-	//Crawler("https://help.sap.com/http.svc/rc/saphelp_glossary/latest/en-US/8a/02cb8a77ddd31184080004aca6e0d1/content.htm");
-  // Crawler("https://help.sap.com/http.svc/rc/saphelp_glossary/latest/en-US/ac/7a154f6a074247b44223809242eed5/content.htm");
+//let crawler = Crawler("https://help.sap.com/http.svc/rc/saphelp_glossary/latest/en-US/35/2cd77bd7705394e10000009b387c12/frameset.htm");
+var crawler =
+Crawler("https://help.sap.com/http.svc/rc/saphelp_glossary/latest/en-US/8a/02cb8a77ddd31184080004aca6e0d1/content.htm");
+// Crawler("https://help.sap.com/http.svc/rc/saphelp_glossary/latest/en-US/ac/7a154f6a074247b44223809242eed5/content.htm");
 
 
-crawler.on("fetchcomplete", function(queueItem, responseBuffer, response) {
+crawler.on("fetchcomplete", function (queueItem, responseBuffer, response) {
 //	console.log("I just received %s (%d bytes)", queueItem.url, responseBuffer.length);
 //	console.log("It was a resource of type %s", response.headers['content-type']);
 //
@@ -40,18 +43,21 @@ crawler.on("fetchcomplete", function(queueItem, responseBuffer, response) {
 	//
 	//
 	// }
-	if(queueItem.url.substr(0,startUrl.length ) === startUrl &&
-	    queueItem.url.indexOf('content.htm')!=-1
-		&& responseBuffer.toString().indexOf('<P><FONT FACE=')!=-1){
+	if (queueItem.url.substr(0, startUrl.length) === startUrl &&
+		queueItem.url.indexOf('content.htm') != -1
+		&& responseBuffer.toString().indexOf('<P><FONT FACE=') != -1) {
 		console.log(queueItem.url);
 		i++;
 		processTerm(responseBuffer.toString());
 	}
-	// if(i===20){
-	// 	process.exit(0);
+	if (i === 100) {
+		logToFile(JSON.stringify(sapGlosRecords, null, 2));
+		process.exit(0);
+
+	}
 	// }
-		// 'https://help.sap.com/http.svc/rc/saphelp_glossary/latest/en-US/46/3cf388e6da51cae10000000a1553ed/content.htm0'){
-		// console.log(responseBuffer);
+	// 'https://help.sap.com/http.svc/rc/saphelp_glossary/latest/en-US/46/3cf388e6da51cae10000000a1553ed/content.htm0'){
+	// console.log(responseBuffer);
 
 
 });
@@ -63,55 +69,60 @@ crawler.start();
 
 var processTerm = (html) => {
 	var termRecord = {
-		definition: ''
+
 	};
 	const td = '<TD><FONT FACE="Arial" COLOR="#FEFEEE" SIZE="5">';
-	const tdStart = html.indexOf(td)>-1 ? html.indexOf(td)+ td.length +1: -1;
+	const tdStart = html.indexOf(td) > -1 ? html.indexOf(td) + td.length + 1 : -1;
 
-	const tdEnd = html.indexOf('</FONT></TD>');
-	if(tdEnd>tdStart && tdStart>-1){
-		const len = tdEnd - tdStart -1;
-		termRecord.name = html.substr(tdStart, len);
-	}
 
 
 	const h3 = '<H3>';
-	const h3Start = html.indexOf(h3)>-1?html.indexOf(h3) +4: -1;
-	const h3End =  html.indexOf('</H3>');
-	if(h3Start>-1 && h3End>h3Start){
-		const h3Len =  h3End - h3Start;
-		const h3Text = html.substr(h3Start, h3Len);
+	const h3Start = html.indexOf(h3) > -1 ? html.indexOf(h3) + 4 : -1;
+	const h3End = html.indexOf('(',h3Start);
+	if (h3Start > -1 && h3End > h3Start) {
 
+		const h3Len = h3End - h3Start;
+
+		const h3Text = html.substr(h3Start, h3Len);
 		termRecord.term = h3Text;
+		termRecord.softwareComponent =  getSoftwareComponent(html.substr(h3Start));
 	}
 
-  processPTags(html,termRecord);
+	processPTags(html, termRecord);
 
-
-	logToFile('/Users/franklinparker/temp/sapTerms.json',
-		JSON.stringify(termRecord,null,2));
-	console.log('term record using pTag\n'+ JSON.stringify(termRecord,null,2));
+	sapGlosRecords.push(termRecord);
+	// logToFile(
+	// 	JSON.stringify(termRecord,null,2));
+	console.log(JSON.stringify(termRecord, null, 2));
 
 };
 
 
-var processPTags = (html, termRecord)=>{
+var processPTags = (html, termRecord) => {
 	var start = 0;
 
-	while(start != -1) {
+	while (start != -1) {
 		const p2 = '<P><FONT FACE="Arial" SIZE=2>';
 		const p2Start = html.indexOf(p2, start) > -1 ? html.indexOf(p2, start) + p2.length : -1;
 		const p2End = html.indexOf('</FONT></P>', start + p2.length);
 
 		if (p2Start > -1 && p2End > p2Start) {
 			const len = p2End - p2Start;
-			termRecord.definition += html.substr(p2Start, len);
+			termRecord.text += html.substr(p2Start, len);
 			start = p2End;
-		}else{
+		} else {
 			start = -1;
 		}
 	}
+}
 
 
+var getSoftwareComponent = (h3txt)=> {
+    console.log('h3:' + h3txt);
+		let start = h3txt.indexOf('(') + 1;
+		let end = h3txt.indexOf(')');
+		let sfComp = h3txt.substr(start , (end - start));
+		console.log('sfCmo:' + sfComp);
+		return sfComp;
 
 }
