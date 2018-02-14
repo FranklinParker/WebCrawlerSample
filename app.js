@@ -107,7 +107,6 @@ var processPTags = (html, termRecord) => {
 
 
 var getSoftwareComponent = (h3txt)=> {
-    console.log('h3:' + h3txt);
 		let start = h3txt.indexOf('(') + 1;
 		let end = h3txt.indexOf(')');
 		let sfComp = h3txt.substr(start , (end - start));
