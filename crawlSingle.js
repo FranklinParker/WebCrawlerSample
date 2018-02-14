@@ -1,6 +1,7 @@
 var Crawler = require("simplecrawler");
 const htmlParser = require('./webcrawler/parsingSap').htmlParser;
 const fs = require('fs');
+const sapGlossryDb = require('./database/cloudant').sapGlossaryDB;
 
 const sapGlosRecords = [];
 
@@ -42,8 +43,14 @@ crawler.on("fetchcomplete", function (queueItem, responseBuffer, response) {
 		} else {
 			processedUrls.push(queueItem.url);
 			count++;
-			htmlParser.processSapTerm(responseBuffer.toString(), sapGlosRecords, queueItem.url);
+			const termRecord = htmlParser.processSapTerm(responseBuffer.toString(), sapGlosRecords, queueItem.url);
 			console.log('processing url:' + queueItem.url + ': processed Count:' + count);
+			console.log('termRecord:', termRecord);
+			termRecord._id = count + termRecord.softwareComponent;
+			termRecord.id = count + termRecord.softwareComponent;
+			sapGlossryDb.insertSapGLossaryRecord(termRecord,(error, result)=>{
+				console.log('result', result);
+			});
 
 		}
 
@@ -54,6 +61,8 @@ crawler.on("fetchcomplete", function (queueItem, responseBuffer, response) {
 
 crawler.on('complete', () => {
 	console.log('done');
+	const sapGlossDB = require('./database/cloudant');
+
 	logToFile(JSON.stringify(sapGlosRecords, null, 2));
 
 });

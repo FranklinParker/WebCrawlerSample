@@ -27,6 +27,7 @@ var processSapTerm = (html,sapGlosRecords, url) => {
 	processPTags(html, termRecord);
 
 	sapGlosRecords.push(termRecord);
+	return termRecord;
 
 	console.log(JSON.stringify(termRecord, null, 2));
 

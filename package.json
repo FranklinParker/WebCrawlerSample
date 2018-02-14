@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cloudant": "^1.10.0-NOTICE",
     "simplecrawler": "^1.1.6"
   }
 }
