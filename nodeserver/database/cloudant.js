@@ -7,8 +7,8 @@ const findSapGlossaryBySoftwareComponent = (softwareComponent, callback) => {
 				"softwareComponent": {
 					"$eq": softwareComponent
 				}
-			}//,
-			//"use_index": ["_design/searchBySoftwareComponent"]
+			},
+			"use_index": ["_design/searchBySoftwareComponent/softwareComponent"]
 		}, function (error, doc) {
 			if (error) {
 				callback(error)
