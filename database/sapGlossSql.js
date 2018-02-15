@@ -27,7 +27,13 @@ const SapGlossary = sequelize.define('SapGlossary', {
 	url: Sequelize.STRING
 
 });
-
+/**
+ * Insert an SAP Glossary record
+ *
+ *
+ * @param sapGloss
+ * @returns {Promise<any>}
+ */
 var insertSapGlossary = (sapGloss) => {
 	return sequelize.sync()
 		.then(() => SapGlossary.create({
@@ -47,8 +53,9 @@ var insertSapGlossary = (sapGloss) => {
 
 insertSapGlossary({
 	url: "https://help.sap.com/http.svc/rc/saphelp_glossary/latest/en-US/8a/02cb8a77ddd31184080004aca6e0d1/content.htm",
-	name: "tracking point (SCM-APO-PPS-AHT)",
+ 	name: "tracking point (SCM-APO-PPS-AHT)",
 	term: "Action Handler -  Tracking ",
-	softwareComponent: "SCM-APO-PPS-AHT",
+ 	softwareComponent: "SCM-APO-PPS-AHT",
 	text: "Point on a production line or at a work center at which an event is triggered.This event can be linked to a receiver action via event type linkage.\r\n This action is then carried out when the event occurs.",
-}).then(sapGlossary => console.log('insert is done:'+ JSON.stringify(sapGlossary,null,2 )));
+}).then(sapGlossary =>
+	console.log('insert is done:'+ JSON.stringify(sapGlossary,null,2 )));
