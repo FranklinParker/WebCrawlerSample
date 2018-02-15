@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="card-header">
+    <h4>Search Sap Glossary </h4>
+
+  </div>
+  <div class="card-body">
+    <div class="form-group">
+      <label>Term to Search For</label>
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        class="form-control"
+        name="searchTerm">
+    </div>
+    <button class="btn btn-primary"
+            (click)="searchSapGlossaryTerm()">
+      Search for Term</button>
+
+  </div>
+
+
+</div>
+
+
