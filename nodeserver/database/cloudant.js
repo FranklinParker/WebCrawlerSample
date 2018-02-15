@@ -1,6 +1,11 @@
 var sapGlossDB;
 var sapGlossFixedDB;
 
+const findById= (id,callback )=>{
+	sapGlossFixedDB.findById(id,(err,result)=>{
+		console.log('result', result);
+	});
+}
 
 const findSapGlossaryBySoftwareComponent = (softwareComponent, callback) => {
 	sapGlossDB.find({
@@ -59,6 +64,7 @@ initDBConnection();
 module.exports.sapGlossaryDB = {
 	findSapGlossaryBySoftwareComponent,
 	findAllSapGlossary,
-	insertSapGlossaryRecord
+	insertSapGlossaryRecord,
+	findById
 
 }

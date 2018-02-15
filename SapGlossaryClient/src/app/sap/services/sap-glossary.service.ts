@@ -10,8 +10,8 @@ export class SapGlossaryService {
   constructor(private http: HttpClient) {
   }
 
-  getSapGlossaryTermBySoftwareComponent(softwareComponent: string): Observable<any> {
-    return this.http.get(this.url + '/getBySoftwareComponent/' + softwareComponent);
+  getById(id: string): Observable<any> {
+    return this.http.get(this.url + '/getById/' + id);
 
   }
 

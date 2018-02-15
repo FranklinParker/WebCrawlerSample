@@ -19,14 +19,14 @@ export class SapGlossarySearchComponent implements OnInit {
    */
   searchSapGlossaryBySoftwareComponent(){
     console.log('softwareComponent:'+ this.softwareComponent);
-    // this.sapService.getSapGlossaryTermBySoftwareComponent(this.softwareComponent)
-    //   .subscribe((resp)=>{
-    //     console.log('search result', resp);
-    //   });
-    this.sapService.getAllSapGlossary()
+     this.sapService.getById(this.softwareComponent)
       .subscribe((resp)=>{
-        console.log('search all result', resp);
+         console.log('search result', resp);
       });
+    // this.sapService.getAllSapGlossary()
+    //   .subscribe((resp)=>{
+    //     console.log('search all result', resp);
+    //   });
   }
 
 }

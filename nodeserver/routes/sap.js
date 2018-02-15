@@ -2,23 +2,23 @@ const express = require('express');
 const router = express.Router();
 const sapDB = require('../database/cloudant').sapGlossaryDB;
 
-router.get('/getBySoftwareComponent/:softwareComponent', function (req, res) {
-	const softwareComponent = req.params.softwareComponent;
-	sapDB.findSapGlossaryBySoftwareComponent(softwareComponent,
-		(err, result) => {
+router.get('/getById/:id', function (req, res) {
+	const id = req.params.softwareComponent;
+	sapDB.findById(id,
+		(err, doc) => {
 			if (err) {
-				console.log('getBySoftwareComponent err', err);
+				console.log('getById err', err);
 				res.status(200).json({
 					status: 'failed',
-					softwareComponent: softwareComponent,
+					error:'error' ,
 
 				});
 
 			} else {
-				console.log('getBySoftwareComponent response ', result);
+				console.log('getById response ', doc);
 				res.status(200).json({
 					status: 'success',
-					softwareComponent: softwareComponent,
+					doc: doc
 
 				});
 			}
