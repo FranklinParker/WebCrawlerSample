@@ -1,26 +1,14 @@
 var Crawler = require("simplecrawler");
 const htmlParser = require('./webcrawler/parsingSap').htmlParser;
 const fs = require('fs');
-const sapGlossryDb = require('./database/cloudant').sapGlossaryDB;
+const {sapGlossarySqlDb} = require('./database/sapGlossSql');
+
 
 const sapGlosRecords = [];
 
 let processedUrls = [];
 
 
-
-
-/**
- * sample usage:
- *
- *
- * @param filePath
- * @param data
- */
-var logToFile = (data) => {
-	fs.writeFileSync('/Users/franklinparker/temp/sapTermsAll.json', data);
-
-};
 
 let count = 0;
 let dupCount = 0;
@@ -44,20 +32,14 @@ crawler.on("fetchcomplete", function (queueItem, responseBuffer, response) {
 			count++;
 			const termRecord = htmlParser.processSapTerm(responseBuffer.toString(), sapGlosRecords, queueItem.url);
 			console.log('processing url:' + queueItem.url + ': processed Count:' + count);
-			termRecord._id = count + termRecord.softwareComponent;
-			sapGlossryDb.insertSapGLossaryRecord(termRecord,(error, result)=>{
-				if(error){
-					console.log('error inserting sap_glossary', error);
-				}else if(result){
-					console.log("sap_glossary added id=" + result.id);
-				}else{
-					console.log("sap_glossary unknown result termrec._id=" + termRecord._id);
-				}
-				// if(count===100){
-				// 	console.log('exiting at:' + count);
-				// 	process.exit(0);
-				// }
-			});
+			sapGlossarySqlDb.insertSapGlossary(termRecord)
+				.then(sapGlossRec => {
+					console.log('inserted record Id:' + sapGlossRec.id);
+					if (count === 100) {
+						console.log('exiting at:' + count);
+						process.exit(0);
+					}
+				});
 
 		}
 
@@ -67,9 +49,8 @@ crawler.on("fetchcomplete", function (queueItem, responseBuffer, response) {
 });
 
 crawler.on('complete', () => {
-	console.log('done');
+	console.log('done ');
 
-	//logToFile(JSON.stringify(sapGlosRecords, null, 2));
 
 });
 

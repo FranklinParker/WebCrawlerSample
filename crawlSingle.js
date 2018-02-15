@@ -48,8 +48,6 @@ crawler.on("fetchcomplete", function (queueItem, responseBuffer, response) {
 			const termRecord = htmlParser.processSapTerm(responseBuffer.toString(), sapGlosRecords, queueItem.url);
 			console.log('processing url:' + queueItem.url + ': processed Count:' + count);
 			console.log('termRecord:', termRecord);
-			termRecord._id = count + termRecord.softwareComponent;
-			termRecord.id = count + termRecord.softwareComponent;
 			sapGlossarySqlDb.insertSapGlossary(termRecord)
 				.then(sapGlossRec=> console.log('inserted record Id:' + sapGlossRec.id));
 

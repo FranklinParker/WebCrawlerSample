@@ -3,7 +3,7 @@ const sequelize = new Sequelize('compose', 'admin', 'ARJKDCRVIPIGPLAG', {
 	host: 'sl-us-south-1-portal.20.dblayer.com',
 	dialect: 'postgres',
 	port: 34751,
-	logging: false,
+	//logging: true,
 
 	pool: {
 		max: 5,
@@ -19,7 +19,7 @@ const SapGlossary = sequelize.define('SapGlossary', {
 	name: Sequelize.STRING,
 	term: Sequelize.STRING,
 	softwareComponent: Sequelize.STRING,
-	text: Sequelize.STRING,
+	text: Sequelize.TEXT,
 	url: Sequelize.STRING
 
 });
@@ -31,7 +31,8 @@ const SapGlossary = sequelize.define('SapGlossary', {
  * @returns {Promise<any>}
  */
 var insertSapGlossary = (sapGloss) => {
-	return  SapGlossary.create({
+	return sequelize.sync()
+		.then(() => SapGlossary.create({
 			url: sapGloss.url,
 			name: sapGloss.name,
 			term: sapGloss.term,
@@ -39,12 +40,13 @@ var insertSapGlossary = (sapGloss) => {
 			text: sapGloss.text
 
 		})
-		.then(sapGlossary => {
-			//console.log(sapGlossary.toJSON());
-			return sapGlossary;
-		}, err => console.log(JSON.stringify(err, null, 2)));
+			.then(sapGlossary => {
+				//console.log(sapGlossary.toJSON());
+				return sapGlossary;
+			}, err => console.log(JSON.stringify(err, null, 2))));
 
 }
-module.exports.sapGlossarySqlDb={
+module.exports.sapGlossarySqlDb = {
 	insertSapGlossary
 }
+
