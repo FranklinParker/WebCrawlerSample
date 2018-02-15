@@ -3,13 +3,17 @@ import { CommonModule } from '@angular/common';
 import { SapGlossaryHomeComponent } from './components/sap-glossary-home/sap-glossary-home.component';
 import { SapGlossarySearchComponent } from './components/sap-glossary-search/sap-glossary-search.component';
 import {FormsModule} from "@angular/forms";
+import {SapGlossaryService} from "./services/sap-glossary.service";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   declarations: [SapGlossaryHomeComponent, SapGlossarySearchComponent],
-  exports: [SapGlossaryHomeComponent]
+  exports: [SapGlossaryHomeComponent],
+  providers: [SapGlossaryService]
 })
 export class SapModule { }
