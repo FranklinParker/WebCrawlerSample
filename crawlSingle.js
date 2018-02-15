@@ -1,7 +1,9 @@
 var Crawler = require("simplecrawler");
 const htmlParser = require('./webcrawler/parsingSap').htmlParser;
 const fs = require('fs');
-const sapGlossryDb = require('./database/cloudant').sapGlossaryDB;
+//const sapGlossryDb = require('./database/cloudant').sapGlossaryDB;
+const {sapGlossarySqlDb } = require('./database/sapGlossSql');
+
 
 const sapGlosRecords = [];
 
@@ -48,9 +50,9 @@ crawler.on("fetchcomplete", function (queueItem, responseBuffer, response) {
 			console.log('termRecord:', termRecord);
 			termRecord._id = count + termRecord.softwareComponent;
 			termRecord.id = count + termRecord.softwareComponent;
-			sapGlossryDb.insertSapGLossaryRecordTest(termRecord,(error, result)=>{
-				console.log('result', result);
-			});
+			sapGlossarySqlDb.insertSapGlossary(termRecord)
+				.then(sapGlossRec=> console.log('inserted record Id:' + sapGlossRec.id));
+
 
 		}
 
