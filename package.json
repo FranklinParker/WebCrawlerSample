@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "cloudant": "^1.10.0-NOTICE",
+    "pg": "^7.4.1",
+    "sequelize": "^4.33.4",
     "simplecrawler": "^1.1.6"
   }
 }

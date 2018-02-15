@@ -1,0 +1,33 @@
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize('compose', 'admin', 'ARJKDCRVIPIGPLAG', {
+	host: 'sl-us-south-1-portal.20.dblayer.com',
+	dialect: 'postgres',
+	port: 34751,
+
+	pool: {
+		max: 5,
+		min: 0,
+		acquire: 30000,
+		idle: 10000
+	},
+
+	// SQLite only
+	//storage: 'path/to/database.sqlite',
+
+	// http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
+	operatorsAliases: false
+});
+
+const User = sequelize.define('user', {
+	username: Sequelize.STRING,
+	lastname: Sequelize.STRING
+});
+
+sequelize.sync()
+	.then(() => User.create({
+		username: 'janedoe',
+		lastname: 'doe'
+	}))
+	.then(jane => {
+		console.log(jane.toJSON());
+	})
