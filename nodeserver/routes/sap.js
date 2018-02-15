@@ -16,7 +16,6 @@ router.get('/getById/:id', function (req, res) {
 				});
 
 			} else {
-				console.log('getById response ', doc);
 				res.status(200).json({
 					status: 'success',
 					doc: doc

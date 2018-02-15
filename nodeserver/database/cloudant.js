@@ -3,7 +3,6 @@ var sapGlossFixedDB;
 
 const findById = (id, callback) => {
 	sapGlossFixedDB.get(id, (err, result) => {
-		console.log('result', result);
 		callback(err,result);
 	});
 }
