@@ -20,14 +20,14 @@ const sequelize = new Sequelize('compose', 'admin', 'ARJKDCRVIPIGPLAG', {
 
 const User = sequelize.define('user', {
 	username: {type: Sequelize.STRING, unique: true},
-	lastname: Sequelize.STRING
+	lastName: Sequelize.STRING
 });
 
 sequelize.sync()
 	.then(() => User.create({
-		username: 'fparker',
-		firstname: 'Franklin',
-		lastname: 'Parker'
+		username: 'hparker',
+		firstName: 'Franklin',
+		lastName: 'Parker'
 	}))
 	.then(jane => {
 		console.log(jane.toJSON());
