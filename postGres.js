@@ -25,9 +25,10 @@ const User = sequelize.define('user', {
 
 sequelize.sync()
 	.then(() => User.create({
-		username: 'janedoe',
-		lastname: 'doe'
+		username: 'fparker',
+		firname:'Franklin',
+		lastname: 'Parker'
 	}))
 	.then(jane => {
 		console.log(jane.toJSON());
-	})
+	});
