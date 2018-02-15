@@ -48,7 +48,7 @@ crawler.on("fetchcomplete", function (queueItem, responseBuffer, response) {
 			console.log('termRecord:', termRecord);
 			termRecord._id = count + termRecord.softwareComponent;
 			termRecord.id = count + termRecord.softwareComponent;
-			sapGlossryDb.insertSapGLossaryRecord(termRecord,(error, result)=>{
+			sapGlossryDb.insertSapGLossaryRecordTest(termRecord,(error, result)=>{
 				console.log('result', result);
 			});
 
