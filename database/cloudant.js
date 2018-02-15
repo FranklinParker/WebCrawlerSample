@@ -28,7 +28,7 @@ var testQuery = (callback) => {
 
 
 var insertSapGLossaryRecord= (record, callback)=>{
-	sapGlossDB.insert(record, record.id, function(error, doc) {
+	sapGlossDB.insert(record, record._id, function(error, doc) {
 		if(error) {
 			callback(error)
 
