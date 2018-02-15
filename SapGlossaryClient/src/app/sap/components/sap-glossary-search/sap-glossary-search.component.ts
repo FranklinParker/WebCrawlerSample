@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {SapGlossaryService} from "../../services/sap-glossary.service";
+import {SapGlossary} from "../../../models/sap-glossary";
 
 @Component({
   selector: 'app-sap-glossary-search',
@@ -8,6 +9,7 @@ import {SapGlossaryService} from "../../services/sap-glossary.service";
 })
 export class SapGlossarySearchComponent implements OnInit {
   softwareComponent ='BC-ABA';
+  sapGlossary:SapGlossary;
 
   constructor(private sapService:SapGlossaryService) { }
 
@@ -23,6 +25,8 @@ export class SapGlossarySearchComponent implements OnInit {
      this.sapService.getById(this.softwareComponent)
       .subscribe((resp)=>{
          console.log('search result', resp);
+         this.sapGlossary = resp.doc;
+         console.log('sapGlossary', this.sapGlossary);
       });
 
   }
