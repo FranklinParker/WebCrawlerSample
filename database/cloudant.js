@@ -1,4 +1,6 @@
 var sapGlossDB;
+var sapGlossFixedDB;
+var sapGlossDupDB;
 
 
 var testQuery = (callback) => {
@@ -27,9 +29,9 @@ var testQuery = (callback) => {
 }
 
 
-var insertSapGLossaryRecord= (record, callback)=>{
-	sapGlossDB.insert(record, record._id, function(error, doc) {
-		if(error) {
+var insertSapGLossaryRecord = (record, callback) => {
+	sapGlossDB.insert(record, record._id, function (error, doc) {
+		if (error) {
 			callback(error)
 
 		} else {
@@ -38,28 +40,74 @@ var insertSapGLossaryRecord= (record, callback)=>{
 	});
 }
 
-var  initDBConnection = ()=> {
+var initDBConnection = () => {
 	let url = "https://9b41eb1a-8a79-4ac7-a698-0377a25f0e2f-bluemix:6dd8b2a82fe7f54a1408132be22bd0f198e26f95eeaf3a7c20095972e9f23cd3@9b41eb1a-8a79-4ac7-a698-0377a25f0e2f-bluemix.cloudant.com"
 	var cloudant = require('cloudant')(url);
 	sapGlossDB = cloudant.use("sap_glossary");
-	testQuery((error,result) => {
-		console.log('query result', result);
-	});
-	insertSapGLossaryRecord({
-		  "_id": 'Second_test',
-			"term": "Demand Data Foundation ",
-			"softwareComponent": "CA-DDF",
-			"text": "A company that supplies other companies with data.This could be either a retailer or a third-party company collecting data\r\n from different data origins and possibly executing data cleansing and enrichment services."
-		},
-		(error, result)=>{
-			console.log('result of insert:', result);
+	sapGlossFixedDB = cloudant.use('sap_glossary_fixed');
+	sapGlossDupDB = cloudant.use('sap_glossary_duplicates');
+
+}
+
+/**
+ *
+ *
+ *
+ * @param callback
+ */
+const findAllSapGlossary = (callback) => {
+	sapGlossDB.list({include_docs: true},
+		function (error, doc) {
+			if (error) {
+				callback(error);
+
+			} else {
+				console.log('docs', doc.rows[0]);
+				callback(null, doc.rows);
+			}
 		});
+}
+/**
+ *
+ *
+ *
+ */
+var findDuplicates = () => {
+	findAllSapGlossary((err,result) => {
+		let swComp = [];
+		result.forEach((rec) => {
+			if (rec.doc.softwareComponent) {
+				let found = swComp.find((swComp) => rec.doc.softwareComponent === swComp._id);
+				if (found) {
+					found.count++;
+					found.records.push(rec.doc);
+
+				} else {
+					swComp.push({
+						_id: rec.doc.softwareComponent,
+						count: 1,
+						records: [rec.doc]
+					});
+
+				}
+			}
+		});
+
+		sapGlossDupDB.bulk({
+			docs: swComp
+		}, function (er,res) {
+			console.log(err);
+			console.log('res', res);
+		});
+	});
 }
 
 
+//console.log('swComp dups:\n'+ JSON.stringify( swComp,null));
 
 
 initDBConnection();
+findDuplicates();
 
 module.exports.sapGlossaryDB = {
 	insertSapGLossaryRecord
