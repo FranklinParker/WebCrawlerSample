@@ -3,7 +3,7 @@ const sequelize = new Sequelize('compose', 'admin', 'ARJKDCRVIPIGPLAG', {
 	host: 'sl-us-south-1-portal.20.dblayer.com',
 	dialect: 'postgres',
 	port: 34751,
-	//logging: true,
+	//logging: false,
 
 	pool: {
 		max: 5,
@@ -46,7 +46,13 @@ var insertSapGlossary = (sapGloss) => {
 			}, err => console.log(JSON.stringify(err, null, 2))));
 
 }
+
+const findSapGlossaryRange = (startPos, number) => {
+	return SapGlossary.findAll(
+		 {offset: startPos, limit: number});
+}
 module.exports.sapGlossarySqlDb = {
-	insertSapGlossary
+	insertSapGlossary,
+	findSapGlossaryRange
 }
 
