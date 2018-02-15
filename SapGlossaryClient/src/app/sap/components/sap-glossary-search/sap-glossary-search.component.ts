@@ -8,6 +8,7 @@ import {SapGlossaryService} from "../../services/sap-glossary.service";
 })
 export class SapGlossarySearchComponent implements OnInit {
   softwareComponent ='BC-ABA';
+
   constructor(private sapService:SapGlossaryService) { }
 
   ngOnInit() {
@@ -23,10 +24,7 @@ export class SapGlossarySearchComponent implements OnInit {
       .subscribe((resp)=>{
          console.log('search result', resp);
       });
-    // this.sapService.getAllSapGlossary()
-    //   .subscribe((resp)=>{
-    //     console.log('search all result', resp);
-    //   });
+
   }
 
 }

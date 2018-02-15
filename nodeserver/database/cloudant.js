@@ -1,9 +1,10 @@
 var sapGlossDB;
 var sapGlossFixedDB;
 
-const findById= (id,callback )=>{
-	sapGlossFixedDB.findById(id,(err,result)=>{
+const findById = (id, callback) => {
+	sapGlossFixedDB.get(id, (err, result) => {
 		console.log('result', result);
+		callback(err,result);
 	});
 }
 
@@ -26,7 +27,7 @@ const findSapGlossaryBySoftwareComponent = (softwareComponent, callback) => {
 }
 
 const findAllSapGlossary = (callback) => {
-	sapGlossDB.list({include_docs:true},
+	sapGlossDB.list({include_docs: true},
 		function (error, doc) {
 			if (error) {
 				callback(error);
@@ -39,9 +40,9 @@ const findAllSapGlossary = (callback) => {
 }
 
 
-var insertSapGlossaryRecord= (record, callback)=>{
-	sapGlossFixedDB.insert(record, function(error, doc) {
-		if(error) {
+var insertSapGlossaryRecord = (record, callback) => {
+	sapGlossFixedDB.insert(record, function (error, doc) {
+		if (error) {
 			callback(error)
 
 		} else {

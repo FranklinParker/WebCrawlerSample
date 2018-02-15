@@ -3,7 +3,8 @@ const router = express.Router();
 const sapDB = require('../database/cloudant').sapGlossaryDB;
 
 router.get('/getById/:id', function (req, res) {
-	const id = req.params.softwareComponent;
+	const id = req.params.id;
+	console.log('id:', id);
 	sapDB.findById(id,
 		(err, doc) => {
 			if (err) {
