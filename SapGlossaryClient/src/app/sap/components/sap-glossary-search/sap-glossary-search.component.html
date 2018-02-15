@@ -5,16 +5,17 @@
   </div>
   <div class="card-body">
     <div class="form-group">
-      <label>Term to Search For</label>
+      <label>Software Component To Search For:</label>
       <input
         type="text"
-        [(ngModel)]="searchTerm"
+        [(ngModel)]="softwareComponent"
         class="form-control"
-        name="searchTerm">
+        name="softwareComponent">
     </div>
     <button class="btn btn-primary"
-            (click)="searchSapGlossaryTerm()">
-      Search for Term</button>
+            type="button"
+            (click)="searchSapGlossaryBySoftwareComponent()">
+      Search Sap Glossary By Software Component</button>
 
   </div>
 

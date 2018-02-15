@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {SapGlossaryService} from "../../services/sap-glossary.service";
 
 @Component({
   selector: 'app-sap-glossary-search',
@@ -6,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sap-glossary-search.component.css']
 })
 export class SapGlossarySearchComponent implements OnInit {
-  searchTerm ='test';
-  constructor() { }
+  softwareComponent ='BC-ABA';
+  constructor(private sapService:SapGlossaryService) { }
 
   ngOnInit() {
   }
@@ -16,8 +17,12 @@ export class SapGlossarySearchComponent implements OnInit {
    * search term
    *
    */
-  searchSapGlossaryTerm(){
-    console.log('searchTerm:'+ this.searchTerm)
+  searchSapGlossaryBySoftwareComponent(){
+    console.log('softwareComponent:'+ this.softwareComponent);
+    this.sapService.getSapGlossaryTermBySoftwareComponent(this.softwareComponent)
+      .subscribe((resp)=>{
+        console.log('search result', resp);
+      });
   }
 
 }
