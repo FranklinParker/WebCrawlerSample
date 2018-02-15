@@ -19,16 +19,16 @@ const sequelize = new Sequelize('compose', 'admin', 'ARJKDCRVIPIGPLAG', {
 });
 
 const User = sequelize.define('user', {
-	username: Sequelize.STRING,
+	username: {type: Sequelize.STRING, unique: true},
 	lastname: Sequelize.STRING
 });
 
 sequelize.sync()
 	.then(() => User.create({
 		username: 'fparker',
-		firname:'Franklin',
+		firstname: 'Franklin',
 		lastname: 'Parker'
 	}))
 	.then(jane => {
 		console.log(jane.toJSON());
-	});
+	}, err => console.log(JSON.stringify(err, null, 2)));
