@@ -6,25 +6,18 @@ var processSapTerm = (html,sapGlosRecords, url) => {
 	var termRecord = {
 		url: url
 	};
-	const td = '<TD><FONT FACE="Arial" COLOR="#FEFEEE" SIZE="5">';
-	const tdStart = html.indexOf(td) > -1 ? html.indexOf(td) + td.length + 2 : -1;
-	const tdEnd = html.indexOf('</FONT></TD>');
-	if(tdEnd>tdStart && tdStart>-1){
-		const len = tdEnd - tdStart -2;
-		termRecord.name = html.substr(tdStart, len);
-	}
+	processTermFromTd(html, termRecord);
 
 	const h3 = '<H3>';
 	const h3Start = html.indexOf(h3) > -1 ? html.indexOf(h3) + 4 : -1;
-	const h3End = html.indexOf('(', h3Start);
+	const h3End = html.indexOf('</H3>', h3Start);
 
 	if (h3Start > -1 && h3End > h3Start) {
 
 		const h3Len = h3End - h3Start;
 
 		const h3Text = html.substr(h3Start, h3Len);
-		termRecord.term = h3Text;
-		termRecord.softwareComponent = getSoftwareComponent(html.substr(h3Start));
+		termRecord.termHeader = h3Text;
 
 	}
 
@@ -35,6 +28,27 @@ var processSapTerm = (html,sapGlosRecords, url) => {
 
 
 };
+
+var processTermFromTd= (html, termRecord) =>{
+	const td = '<TD><FONT FACE="Arial" COLOR="#FEFEEE" SIZE="5">';
+	const tdStart = html.indexOf(td) > -1 ? html.indexOf(td) + td.length + 2 : -1;
+	const tdEnd = html.indexOf('</FONT></TD>');
+
+	if(tdEnd>tdStart && tdStart>-1){
+		const len = tdEnd - tdStart -2;
+		let tdValue = html.substr(tdStart, len);
+		const endOfTerm = tdValue.indexOf('(');
+		if(endOfTerm>0){
+			termRecord.term = tdValue.substring(0,endOfTerm );
+			let endOfTd = tdValue.indexOf(')');
+			console.log('tdValue:'+ tdValue + ':endofTerm:'
+				+ endOfTerm+ ":endOfTd:" + endOfTd);
+			termRecord.softwareComponent = tdValue.substring(endOfTerm+1, endOfTd);
+		}
+
+	}
+
+}
 
 
 var processPTags = (html, termRecord) => {
@@ -57,12 +71,6 @@ var processPTags = (html, termRecord) => {
 }
 
 
-var getSoftwareComponent = (h3txt) => {
-	let start = h3txt.indexOf('(') + 1;
-	let end = h3txt.indexOf(')');
-	let sfComp = h3txt.substr(start, (end - start));
-	return sfComp;
-}
 
 module.exports.htmlParser ={
 	processSapTerm

@@ -14,11 +14,11 @@ const sequelize = new Sequelize('compose', 'admin', 'ARJKDCRVIPIGPLAG', {
 	operatorsAliases: false
 });
 
-const SapGlossary = sequelize.define('SapGlossary', {
+const SapGlossary = sequelize.define('TestSapGlossary', {
 	//username: {type: Sequelize.STRING, unique: true},
-	name: Sequelize.STRING,
 	term: Sequelize.STRING,
 	softwareComponent: Sequelize.STRING,
+	termHeader: Sequelize.STRING,
 	text: Sequelize.TEXT,
 	url: Sequelize.STRING
 
@@ -34,7 +34,7 @@ var insertSapGlossary = (sapGloss) => {
 	return sequelize.sync()
 		.then(() => SapGlossary.create({
 			url: sapGloss.url,
-			name: sapGloss.name,
+			termHeader: sapGloss.termHeader,
 			term: sapGloss.term,
 			softwareComponent: sapGloss.softwareComponent,
 			text: sapGloss.text
