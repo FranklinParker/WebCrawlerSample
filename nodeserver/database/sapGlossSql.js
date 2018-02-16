@@ -39,7 +39,26 @@ const findSapGlossariesByStartLimit = (startPos, number) => {
 	});
 }
 
+
+const findSapGlossariesBySoftwareComponent = (softwareComponent) => {
+	console.log('findSapGlossariesBySoftwareComponent softwareComponent:'
+		+ softwareComponent);
+	return SapGlossary.findAll(
+		{ where: {
+				softwareComponent:  softwareComponent
+
+			}
+		}).then((records) => {
+		let sapGlossaries = [];
+		records.forEach((record) => {
+			sapGlossaries.push(record.dataValues);
+		});
+		return sapGlossaries;
+	}, err=> console.log(err));
+}
+
 module.exports.sapGlossarySqlDb = {
-	findSapGlossariesByStartLimit
+	findSapGlossariesByStartLimit,
+	findSapGlossariesBySoftwareComponent
 }
 

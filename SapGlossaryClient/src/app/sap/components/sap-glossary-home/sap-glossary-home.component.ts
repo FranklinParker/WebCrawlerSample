@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {SapGlossaryService} from "../../services/sap-glossary.service";
+import {SapGlossary} from "../../../models/sap-glossary";
 
 @Component({
   selector: 'app-sap-glossary-home',
@@ -6,10 +8,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sap-glossary-home.component.css']
 })
 export class SapGlossaryHomeComponent implements OnInit {
-
-  constructor() { }
+  sapGlossaries:SapGlossary[] = [];
+  constructor(private sapGlossaryService:SapGlossaryService) { }
 
   ngOnInit() {
+    this.sapGlossaryService.getAllSapGlossary()
+      .subscribe((records:SapGlossary[])=>{
+        this.sapGlossaries = records;
+      });
+
+  }
+
+  searchSoftwareComponentEvent(softwareComponent: string){
+    console.log('searchSoftwareComponentEvent($event):'+ softwareComponent);
+    this.sapGlossaryService.findBySoftwareComponent(softwareComponent)
+      .subscribe((records:SapGlossary[])=>{
+        this.sapGlossaries = records;
+      });
+
   }
 
 }

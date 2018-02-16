@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {SapGlossary} from "../../../models/sap-glossary";
 import {SapGlossaryService} from "../../services/sap-glossary.service";
 
@@ -8,14 +8,11 @@ import {SapGlossaryService} from "../../services/sap-glossary.service";
   styleUrls: ['./sap-glossary-list.component.css']
 })
 export class SapGlossaryListComponent implements OnInit {
-  sapGlossaries: SapGlossary[] = [];
-  constructor(private sapGlossaryService:SapGlossaryService) { }
+  @Input('sapGlossaries') sapGlossaries:SapGlossary[] = [];
+  constructor() { }
 
   ngOnInit() {
-    this.sapGlossaryService.getAllSapGlossary()
-      .subscribe((records:SapGlossary[])=>{
-        this.sapGlossaries = records;
-      });
+
 
   }
 

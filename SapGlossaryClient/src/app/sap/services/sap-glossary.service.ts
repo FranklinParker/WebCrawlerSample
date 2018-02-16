@@ -32,4 +32,20 @@ export class SapGlossaryService {
       });
   }
 
+  //findBySoftwareComponent
+
+  /**
+   * finds sap glossary records by software component
+   *
+   * @returns {Observable<SapGlossary[]>}
+   */
+
+  findBySoftwareComponent(softwareComponent:string ): Observable<SapGlossary []> {
+    return this.http.get(this.url + '/findBySoftwareComponent/' +
+                     softwareComponent)
+      .map((response:{ status:string, records: SapGlossary []})=>{
+        console.log(response.records);
+        return response.records;
+
+      });
 }

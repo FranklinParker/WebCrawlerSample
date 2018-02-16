@@ -48,6 +48,25 @@ router.get('/findByOffsetAndNumberRecords/:offset/:number', function (req, res) 
 		});
 });
 
+router.get('/findBySoftwareComponent/:softwareComponent', function (req, res) {
+	const softwareComponent = req.params.softwareComponent;
+	console.log('softwareComponent:'+ softwareComponent);
+
+	sapSqlDB.findSapGlossariesBySoftwareComponent(softwareComponent)
+		.then((records)=> {
+			res.status(200).json({
+				status: 'success',
+				records: records
+			});
+		},(err)=>{
+			console.log('err', err);
+			res.status(200).json({
+				status: 'failed'
+			});
+
+		});
+});
+
 
 
 router.get('/getAll', function (req, res) {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {SapGlossaryService} from "../../services/sap-glossary.service";
 import {SapGlossary} from "../../../models/sap-glossary";
 
@@ -10,6 +10,7 @@ import {SapGlossary} from "../../../models/sap-glossary";
 export class SapGlossarySearchComponent implements OnInit {
   softwareComponent ='BC-ABA';
   sapGlossary:SapGlossary;
+  @Output('searchSoftwareComponentEvent') searchSoftwareComponentEvent = new EventEmitter();
 
   constructor(private sapService:SapGlossaryService) { }
 
@@ -22,12 +23,8 @@ export class SapGlossarySearchComponent implements OnInit {
    */
   searchSapGlossaryBySoftwareComponent(){
     console.log('softwareComponent:'+ this.softwareComponent);
-     this.sapService.getAllSapGlossary()
-      .subscribe((resp)=>{
-         console.log('search result', resp);
-         //this.sapGlossary = resp.doc;
-         //console.log('sapGlossary', this.sapGlossary);
-      });
+    this.searchSoftwareComponentEvent.emit(this.softwareComponent);
+
 
   }
 
