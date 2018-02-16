@@ -1,3 +1,20 @@
 .btn-font {
   font-size: 12px;
 }
+
+.p-text-font{
+  font-size: 16px;
+  font-style: italic;
+  color: darkblue;
+}
+
+.p-id-font{
+  font-size: 16px;
+  color: white;
+  background-color: black;
+}
+
+.p-url-font{
+  font-size: 12px;
+  color: red;
+}

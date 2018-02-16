@@ -3,7 +3,7 @@ const sequelize = new Sequelize('compose', 'admin', 'ARJKDCRVIPIGPLAG', {
 	host: 'sl-us-south-1-portal.20.dblayer.com',
 	dialect: 'postgres',
 	port: 34751,
-	//logging: false,
+	logging: false,
 
 	pool: {
 		max: 5,
@@ -41,8 +41,7 @@ const findSapGlossariesByStartLimit = (startPos, number) => {
 
 
 const findSapGlossariesBySoftwareComponent = (softwareComponent) => {
-	console.log('findSapGlossariesBySoftwareComponent softwareComponent:'
-		+ softwareComponent);
+
 	return SapGlossary.findAll(
 		{ where: {
 				softwareComponent:  softwareComponent

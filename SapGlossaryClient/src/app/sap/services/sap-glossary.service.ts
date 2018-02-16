@@ -24,7 +24,7 @@ export class SapGlossaryService {
    */
 
   getAllSapGlossary(): Observable<SapGlossary []> {
-    return this.http.get(this.url + '/findByOffsetAndNumberRecords/0/50')
+    return this.http.get(this.url + '/findByOffsetAndNumberRecords/0/100')
       .map((response:{ status:string, records: SapGlossary []})=>{
         console.log(response.records);
         return response.records;
@@ -42,10 +42,11 @@ export class SapGlossaryService {
 
   findBySoftwareComponent(softwareComponent:string ): Observable<SapGlossary []> {
     return this.http.get(this.url + '/findBySoftwareComponent/' +
-                     softwareComponent)
-      .map((response:{ status:string, records: SapGlossary []})=>{
+      softwareComponent)
+      .map((response: { status: string, records: SapGlossary [] }) => {
         console.log(response.records);
         return response.records;
 
       });
+  }
 }
