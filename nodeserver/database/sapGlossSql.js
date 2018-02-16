@@ -14,11 +14,11 @@ const sequelize = new Sequelize('compose', 'admin', 'ARJKDCRVIPIGPLAG', {
 	operatorsAliases: false
 });
 
-const SapGlossary = sequelize.define('SapGlossary', {
+const SapGlossary = sequelize.define('TestSapGlossary', {
 	//username: {type: Sequelize.STRING, unique: true},
-	name: Sequelize.STRING,
 	term: Sequelize.STRING,
 	softwareComponent: Sequelize.STRING,
+	termHeader: Sequelize.STRING,
 	text: Sequelize.TEXT,
 	url: Sequelize.STRING
 
@@ -27,7 +27,7 @@ const SapGlossary = sequelize.define('SapGlossary', {
 const findSapGlossariesByStartLimit = (startPos, number) => {
 	return SapGlossary.findAll(
 		{
-			attributes: ['id', 'name', 'term', 'url', 'softwareComponent', 'text', 'updatedAt'],
+			attributes: ['id', 'termHeader', 'term', 'url', 'softwareComponent', 'text', 'updatedAt'],
 			offset: startPos, limit: number,
 			order: sequelize.col('id')
 		}).then((records) => {
