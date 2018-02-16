@@ -49,7 +49,12 @@ var insertSapGlossary = (sapGloss) => {
 
 const findSapGlossaryRange = (startPos, number) => {
 	return SapGlossary.findAll(
-		 {offset: startPos, limit: number});
+		{
+			attributes: ['id','name', 'term','url', 'softwareComponent', 'text'],
+			offset: startPos, limit: number,
+			order: sequelize.col('id')
+		});
+		 //{offset: startPos, limit: number});
 }
 module.exports.sapGlossarySqlDb = {
 	insertSapGlossary,
