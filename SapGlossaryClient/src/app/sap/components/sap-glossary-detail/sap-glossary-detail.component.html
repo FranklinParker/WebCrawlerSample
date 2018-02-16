@@ -4,11 +4,14 @@
   <div class="col-md-3">{{sapGlossary.softwareComponent}}
   </div>
   <div class="col-md-1">
-    <button class="btn btn-sm btn-light btn-font">
+    <button class="btn btn-sm btn-light btn-font"
+            (click)="showFullGlossary=!showFullGlossary">
       <i *ngIf="!showFullGlossary" class="fa fa-arrow-down"></i>
       <i *ngIf="showFullGlossary" class="fa fa-arrow-up"></i>
     </button>
   </div>
-
-
+</div>
+<div class="card card-body" *ngIf="showFullGlossary">
+  <p>{{sapGlossary.text}}</p>
+  <p>{{sapGlossary.url}}</p>
 </div>
