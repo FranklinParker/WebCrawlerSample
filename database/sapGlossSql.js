@@ -50,12 +50,19 @@ var insertSapGlossary = (sapGloss) => {
 const findSapGlossaryRange = (startPos, number) => {
 	return SapGlossary.findAll(
 		{
-			attributes: ['id','name', 'term','url', 'softwareComponent', 'text'],
+			attributes: ['id', 'name', 'term', 'url', 'softwareComponent', 'text'],
 			offset: startPos, limit: number,
 			order: sequelize.col('id')
+		}).then((records) => {
+		let sapGlossaries = [];
+		records.forEach((record) => {
+			sapGlossaries.push(record.dataValues);
 		});
-		 //{offset: startPos, limit: number});
+		return sapGlossaries;
+	});
+	//{offset: startPos, limit: number});
 }
+
 module.exports.sapGlossarySqlDb = {
 	insertSapGlossary,
 	findSapGlossaryRange
