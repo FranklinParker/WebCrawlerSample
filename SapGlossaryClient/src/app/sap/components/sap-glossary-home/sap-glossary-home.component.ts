@@ -12,16 +12,21 @@ export class SapGlossaryHomeComponent implements OnInit {
   constructor(private sapGlossaryService:SapGlossaryService) { }
 
   ngOnInit() {
-    this.sapGlossaryService.getAllSapGlossary()
-      .subscribe((records:SapGlossary[])=>{
-        this.sapGlossaries = records;
-      });
+    this.resetSearch();
 
   }
 
   searchSoftwareComponentEvent(softwareComponent: string){
     console.log('searchSoftwareComponentEvent($event):'+ softwareComponent);
     this.sapGlossaryService.findBySoftwareComponent(softwareComponent)
+      .subscribe((records:SapGlossary[])=>{
+        this.sapGlossaries = records;
+      });
+
+  }
+
+  resetSearch(){
+    this.sapGlossaryService.getAllSapGlossary()
       .subscribe((records:SapGlossary[])=>{
         this.sapGlossaries = records;
       });

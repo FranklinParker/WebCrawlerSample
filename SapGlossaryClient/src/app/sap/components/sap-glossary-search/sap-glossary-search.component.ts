@@ -11,6 +11,8 @@ export class SapGlossarySearchComponent implements OnInit {
   softwareComponent ='BC-ABA';
   sapGlossary:SapGlossary;
   @Output('searchSoftwareComponentEvent') searchSoftwareComponentEvent = new EventEmitter();
+  @Output('resetSearch') resetSearch = new EventEmitter();
+
 
   constructor(private sapService:SapGlossaryService) { }
 
@@ -18,14 +20,15 @@ export class SapGlossarySearchComponent implements OnInit {
   }
 
   /**
-   * search term
+   * search by software component
    *
    */
   searchSapGlossaryBySoftwareComponent(){
-    console.log('softwareComponent:'+ this.softwareComponent);
     this.searchSoftwareComponentEvent.emit(this.softwareComponent);
+  }
 
-
+  reset(){
+    this.resetSearch.emit();
   }
 
 }
