@@ -1,5 +1,6 @@
 export interface SapGlossary {
-  _id: string;
+  id: string;
+  name: string;
   softwareComponent: string;
   text: string;
   url: string;

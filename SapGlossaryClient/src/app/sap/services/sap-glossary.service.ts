@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
+import 'rxjs/add/operator/map';
 import {environment} from "../../../environments/environment";
+import {SapGlossary} from "../../models/sap-glossary";
 
 @Injectable()
 export class SapGlossaryService {
@@ -15,8 +17,19 @@ export class SapGlossaryService {
 
   }
 
-  getAllSapGlossary(): Observable<any> {
-    return this.http.get(this.url + '/findByOffsetAndNumberRecords/0/50');
+  /**
+   * gets the sap glossary records
+   *
+   * @returns {Observable<SapGlossary[]>}
+   */
+
+  getAllSapGlossary(): Observable<SapGlossary []> {
+    return this.http.get(this.url + '/findByOffsetAndNumberRecords/0/50')
+      .map((response:{ status:string, records: SapGlossary []})=>{
+        console.log(response.records);
+        return response.records;
+
+      });
   }
 
 }
