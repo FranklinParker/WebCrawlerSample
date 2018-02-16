@@ -6,6 +6,7 @@ import {FormsModule} from "@angular/forms";
 import {SapGlossaryService} from "./services/sap-glossary.service";
 import {HttpClientModule} from "@angular/common/http";
 import { SapGlossaryListComponent } from './components/sap-glossary-list/sap-glossary-list.component';
+import { SapGlossaryDetailComponent } from './components/sap-glossary-detail/sap-glossary-detail.component';
 
 @NgModule({
   imports: [
@@ -13,7 +14,7 @@ import { SapGlossaryListComponent } from './components/sap-glossary-list/sap-glo
     FormsModule,
     HttpClientModule
   ],
-  declarations: [SapGlossaryHomeComponent, SapGlossarySearchComponent, SapGlossaryListComponent],
+  declarations: [SapGlossaryHomeComponent, SapGlossarySearchComponent, SapGlossaryListComponent, SapGlossaryDetailComponent],
   exports: [SapGlossaryHomeComponent],
   providers: [SapGlossaryService]
 })

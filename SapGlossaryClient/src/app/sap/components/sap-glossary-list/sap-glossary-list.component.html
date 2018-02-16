@@ -1,20 +1,12 @@
-<div class="card card-body">
-  <table class="table table-responsive table-striped" >
-    <thead>
-    <tr>
-      <th>Name</th>
-      <th>Software Component</th>
-      <th>Term</th>
+<div class="container-fluid">
+  <div class="row sap-detail-box">
+      <div class="col-md-4">Name</div>
+      <div class="col-md-4">Software Component</div>
+      <div class="col-md-4">Term</div>
 
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let sapGloss of sapGlossaries">
-      <td>{{sapGloss.name}}</td>
-      <td>{{sapGloss.softwareComponent}}</td>
-      <td>{{sapGloss.term}}</td>
-    </tr>
+  </div>
+  <app-sap-glossary-detail
+    *ngFor="let sapGlossary of sapGlossaries"
+    [sapGlossary]="sapGlossary"></app-sap-glossary-detail>
 
-    </tbody>
-  </table>
 </div>
