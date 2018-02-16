@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const sapDB = require('../database/cloudant').sapGlossaryDB;
+const sapSqlDB = require('../database/sapGlossSql');
 
 router.get('/getById/:id', function (req, res) {
 	const id = req.params.id;
@@ -25,6 +26,20 @@ router.get('/getById/:id', function (req, res) {
 		});
 
 });
+
+
+router.get('/findByOffsetAndNumberRecords/:offset/:number', function (req, res) {
+	const offset = req.params.offset;
+	const number = req.params.number;
+	sapSqlDB.findSapGlossariesByStartLimit(offset, limit)
+		.then((records)=> {
+			res.status(200).json({
+				status: 'success',
+				records: records
+			});
+		});
+});
+
 
 
 router.get('/getAll', function (req, res) {

@@ -23,31 +23,8 @@ const SapGlossary = sequelize.define('SapGlossary', {
 	url: Sequelize.STRING
 
 });
-/**
- * Insert an SAP Glossary record
- *
- *
- * @param sapGloss
- * @returns {Promise<any>}
- */
-var insertSapGlossary = (sapGloss) => {
-	return sequelize.sync()
-		.then(() => SapGlossary.create({
-			url: sapGloss.url,
-			name: sapGloss.name,
-			term: sapGloss.term,
-			softwareComponent: sapGloss.softwareComponent,
-			text: sapGloss.text
 
-		})
-			.then(sapGlossary => {
-				//console.log(sapGlossary.toJSON());
-				return sapGlossary;
-			}, err => console.log(JSON.stringify(err, null, 2))));
-
-}
-
-const findSapGlossaryRange = (startPos, number) => {
+const findSapGlossariesByStartLimit = (startPos, number) => {
 	return SapGlossary.findAll(
 		{
 			attributes: ['id', 'name', 'term', 'url', 'softwareComponent', 'text', 'updatedAt'],
@@ -64,7 +41,6 @@ const findSapGlossaryRange = (startPos, number) => {
 }
 
 module.exports.sapGlossarySqlDb = {
-	insertSapGlossary,
-	findSapGlossaryRange
+	findSapGlossariesByStartLimit
 }
 
