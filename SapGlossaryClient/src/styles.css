@@ -1,7 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
-.sap-detail-box{
+.sap-detail-header {
   border: 1px solid darkblue;
   border-radius: 10px;
   padding: 10px;
+  background: lightgray;
+  font-size: 14px;
+
+}
+
+.sap-detail-row {
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 14px;
 }
 

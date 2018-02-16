@@ -8,6 +8,7 @@ import {SapGlossary} from "../../../models/sap-glossary";
 })
 export class SapGlossaryDetailComponent implements OnInit {
   @Input('sapGlossary') sapGlossary:SapGlossary;
+  showFullGlossary = false;
   constructor() { }
 
   ngOnInit() {
