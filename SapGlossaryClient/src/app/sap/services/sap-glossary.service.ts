@@ -16,7 +16,7 @@ export class SapGlossaryService {
   }
 
   getAllSapGlossary(): Observable<any> {
-    return this.http.get(this.url + '/getAll');
+    return this.http.get(this.url + '/findByOffsetAndNumberRecords/0/50');
   }
 
 }

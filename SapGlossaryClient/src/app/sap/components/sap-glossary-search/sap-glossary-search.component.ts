@@ -22,11 +22,11 @@ export class SapGlossarySearchComponent implements OnInit {
    */
   searchSapGlossaryBySoftwareComponent(){
     console.log('softwareComponent:'+ this.softwareComponent);
-     this.sapService.getById(this.softwareComponent)
+     this.sapService.getAllSapGlossary()
       .subscribe((resp)=>{
          console.log('search result', resp);
-         this.sapGlossary = resp.doc;
-         console.log('sapGlossary', this.sapGlossary);
+         //this.sapGlossary = resp.doc;
+         //console.log('sapGlossary', this.sapGlossary);
       });
 
   }

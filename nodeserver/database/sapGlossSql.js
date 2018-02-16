@@ -37,7 +37,6 @@ const findSapGlossariesByStartLimit = (startPos, number) => {
 		});
 		return sapGlossaries;
 	});
-	//{offset: startPos, limit: number});
 }
 
 module.exports.sapGlossarySqlDb = {
