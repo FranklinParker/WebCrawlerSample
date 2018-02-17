@@ -14,7 +14,7 @@ const sequelize = new Sequelize('compose', 'admin', 'ARJKDCRVIPIGPLAG', {
 	operatorsAliases: false
 });
 
-const SapGlossary = sequelize.define('TestSapGlossary', {
+const SapGlossary = sequelize.define('SapGlossary', {
 	//username: {type: Sequelize.STRING, unique: true},
 	term: Sequelize.STRING,
 	softwareComponent: Sequelize.STRING,
