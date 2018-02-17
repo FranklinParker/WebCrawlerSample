@@ -67,6 +67,25 @@ router.get('/findBySoftwareComponent/:softwareComponent', function (req, res) {
 		});
 });
 
+router.get('/findByTermLike/:term', function (req, res) {
+	const term = req.params.term;
+	console.log('term:'+ term);
+
+	sapSqlDB.findByTermLike(term)
+		.then((records)=> {
+			res.status(200).json({
+				status: 'success',
+				records: records
+			});
+		},(err)=>{
+			console.log('err', err);
+			res.status(200).json({
+				status: 'failed'
+			});
+
+		});
+});
+
 
 
 router.get('/getAll', function (req, res) {

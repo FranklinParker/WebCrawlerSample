@@ -14,6 +14,8 @@ const sequelize = new Sequelize('compose', 'admin', 'ARJKDCRVIPIGPLAG', {
 	operatorsAliases: false
 });
 
+const Op = Sequelize.Op;
+
 const SapGlossary = sequelize.define('SapGlossary', {
 	//username: {type: Sequelize.STRING, unique: true},
 	term: Sequelize.STRING,
@@ -62,8 +64,27 @@ const findSapGlossaryRange = (startPos, number) => {
 	});
 }
 
+const findByTermLike = (term) => {
+	return SapGlossary.findAll(
+		{
+			where: {
+				term: {
+					[Op.like]: term+'%'
+				}
+			},
+			limit: 5
+		}).then((records) => {
+		let sapGlossaries = [];
+		records.forEach((record) => {
+			sapGlossaries.push(record.dataValues);
+		});
+		return sapGlossaries;
+	});
+}
+
 module.exports.sapGlossarySqlDb = {
 	insertSapGlossary,
-	findSapGlossaryRange
+	findSapGlossaryRange,
+	findByTermLike
 }
 

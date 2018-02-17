@@ -1,4 +1,6 @@
 const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
 const sequelize = new Sequelize('compose', 'admin', 'ARJKDCRVIPIGPLAG', {
 	host: 'sl-us-south-1-portal.20.dblayer.com',
 	dialect: 'postgres',
@@ -47,6 +49,32 @@ const findSapGlossariesBySoftwareComponent = (softwareComponent) => {
 				softwareComponent:  softwareComponent
 
 			}
+		}).then((records) => {
+		let sapGlossaries = [];
+		records.forEach((record) => {
+			sapGlossaries.push(record.dataValues);
+		});
+		return sapGlossaries;
+	}, err=> console.log(err));
+}
+
+
+/***
+ * find where term like
+ *
+ * @param term
+ * @param limit
+ */
+
+const findSapGlossariesByTermLike = (term) => {
+	return SapGlossary.findAll(
+		{
+			where: {
+				term: {
+					[Op.like]: term+'%'
+				}
+			},
+			limit: 50
 		}).then((records) => {
 		let sapGlossaries = [];
 		records.forEach((record) => {
