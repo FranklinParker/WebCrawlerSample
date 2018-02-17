@@ -1,18 +1,14 @@
 <div class="container-fluid">
-  <div class="container-fluid">
-    <app-sap-glossary-search
-      (searchSoftwareComponentEvent)="searchSoftwareComponentEvent($event)"
-      (resetSearch)="resetSearch()">
+  <app-sap-glossary-search
+    (searchSoftwareComponentEvent)="searchSoftwareComponentEvent($event)"
+    (resetSearch)="resetSearch()">
 
-    </app-sap-glossary-search>
+  </app-sap-glossary-search>
 
-  </div>
-  <div class="container-fluid">
-    <app-sap-glossary-list
-      [startPos]="startPos"
-      [numberRecords]="numberRecords"
-      [sapGlossaries]="sapGlossaries"
-      (moveNext)="moveNext()"></app-sap-glossary-list>
-  </div>
+  <app-sap-glossary-list
+    [startPos]="startPos"
+    [numberRecords]="numberRecords"
+    [sapGlossaries]="sapGlossaries"
+    (moveNext)="moveNext()"></app-sap-glossary-list>
 
 </div>
