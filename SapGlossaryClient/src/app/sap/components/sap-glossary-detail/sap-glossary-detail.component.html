@@ -1,10 +1,9 @@
 <div class="row sap-detail-row m-2">
+  <div class="col-md-2">{{sapGlossary.softwareComponent}}</div>
   <div class="col-md-3">{{sapGlossary.termHeader}}</div>
-  <div class="col-md-3">{{sapGlossary.term}}</div>
-  <div class="col-md-2">{{sapGlossary.softwareComponent}}
-  </div>
-  <div class="col-md-4">
-    <button class="btn btn-sm btn-light btn-font"
+  <div class="col-md-6">{{sapGlossary.term}}</div>
+  <div class="col-md-1">
+    <button class="btn btn-sm btn-light btn-font ml-auto"
             (click)="showFullGlossary=!showFullGlossary">
       <i *ngIf="!showFullGlossary" class="fa fa-arrow-down"></i>
       <i *ngIf="showFullGlossary" class="fa fa-arrow-up"></i>
