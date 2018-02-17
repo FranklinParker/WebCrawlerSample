@@ -9,6 +9,8 @@ import {SapGlossary} from "../../../models/sap-glossary";
 })
 export class SapGlossaryHomeComponent implements OnInit {
   sapGlossaries:SapGlossary[] = [];
+  startPos = 0;
+  numberRecords = 25;
   constructor(private sapGlossaryService:SapGlossaryService) { }
 
   ngOnInit() {
@@ -26,7 +28,7 @@ export class SapGlossaryHomeComponent implements OnInit {
   }
 
   resetSearch(){
-    this.sapGlossaryService.getAllSapGlossary()
+    this.sapGlossaryService.getAllSapGlossary(this.startPos,this.numberRecords)
       .subscribe((records:SapGlossary[])=>{
         this.sapGlossaries = records;
       });

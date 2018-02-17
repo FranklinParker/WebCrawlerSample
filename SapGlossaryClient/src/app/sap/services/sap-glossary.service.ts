@@ -23,8 +23,9 @@ export class SapGlossaryService {
    * @returns {Observable<SapGlossary[]>}
    */
 
-  getAllSapGlossary(): Observable<SapGlossary []> {
-    return this.http.get(this.url + '/findByOffsetAndNumberRecords/0/100')
+  getAllSapGlossary(startPos,numberRecords): Observable<SapGlossary []> {
+    return this.http.get(this.url +
+      `/findByOffsetAndNumberRecords/${startPos}/${numberRecords}`)
       .map((response:{ status:string, records: SapGlossary []})=>{
         console.log(response.records);
         return response.records;
