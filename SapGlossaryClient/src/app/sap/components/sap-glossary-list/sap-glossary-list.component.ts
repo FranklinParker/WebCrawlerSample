@@ -12,6 +12,8 @@ export class SapGlossaryListComponent implements OnInit {
   @Input('startPos') startPos;
   @Input('numberRecords') numberRecords;
   @Output('moveNext') moveNextEvent = new EventEmitter();
+  @Output('moveBack') moveBackEvent = new EventEmitter();
+
 
   constructor() { }
 
@@ -22,6 +24,11 @@ export class SapGlossaryListComponent implements OnInit {
 
   moveNext(){
     this.moveNextEvent.emit();
+
+  }
+
+  moveBack(){
+    this.moveBackEvent.emit();
 
   }
 

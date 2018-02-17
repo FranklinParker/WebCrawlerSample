@@ -27,7 +27,6 @@ export class SapGlossaryService {
     return this.http.get(this.url +
       `/findByOffsetAndNumberRecords/${startPos}/${numberRecords}`)
       .map((response:{ status:string, records: SapGlossary []})=>{
-        console.log(response.records);
         return response.records;
 
       });

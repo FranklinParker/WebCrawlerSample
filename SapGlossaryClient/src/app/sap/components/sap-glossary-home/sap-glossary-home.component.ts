@@ -32,6 +32,15 @@ export class SapGlossaryHomeComponent implements OnInit {
     this.resetSearch();
   }
 
+  moveBack(){
+    if(this.startPos < this.numberRecords){
+      this.startPos= 0;
+    }else{
+      this.startPos -= this.numberRecords;
+    }
+    this.resetSearch();
+  }
+
   resetSearch(){
     this.sapGlossaryService.getAllSapGlossary(this.startPos,this.numberRecords)
       .subscribe((records:SapGlossary[])=>{
