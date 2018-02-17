@@ -1,9 +1,13 @@
 <div class="card">
   <div class="card-header">
-    <h4>Search Sap Glossary </h4>
+    <label>Search Sap Glossary </label>
+    <button class="btn btn-sm btn-light btn-font ml-auto"
+            (click)="showSearch=!showSearch">
+      <i *ngIf="!showSearch" class="fa fa-arrow-down"></i>
+      <i *ngIf="showSearch" class="fa fa-arrow-up"></i>
+    </button>
   </div>
-  <div class="card-body">
-    <div class="row">
+  <div class="card-body" *ngIf="showSearch">
       <div class="form-group">
         <label>Software Component To Search For:</label>
         <input
@@ -21,7 +25,6 @@
               type="button"
               (click)="reset()">Reset
       </button>
-    </div>
   </div>
 </div>
 

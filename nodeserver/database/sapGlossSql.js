@@ -29,7 +29,7 @@ const findSapGlossariesByStartLimit = (startPos, number) => {
 		{
 			attributes: ['id', 'termHeader', 'term', 'url', 'softwareComponent', 'text', 'updatedAt'],
 			offset: startPos, limit: number,
-			order: sequelize.col('id')
+			order: sequelize.col('term')
 		}).then((records) => {
 		let sapGlossaries = [];
 		records.forEach((record) => {
