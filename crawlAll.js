@@ -35,10 +35,10 @@ crawler.on("fetchcomplete", function (queueItem, responseBuffer, response) {
 			sapGlossarySqlDb.insertSapGlossary(termRecord)
 				.then(sapGlossRec => {
 					console.log('inserted record Id:' + sapGlossRec.id);
-					if (count === 100) {
-						console.log('exiting at:' + count);
-						process.exit(0);
-					}
+					// if (count === 100) {
+					// 	console.log('exiting at:' + count);
+					// 	process.exit(0);
+					// }
 				});
 
 		}
