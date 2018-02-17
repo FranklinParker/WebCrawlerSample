@@ -5,8 +5,13 @@
     <div class="col-md-3 p-2">Software Component</div>
     <div class="col-md-3 record-navigator p-2">
       Record {{startPos}} thru {{startPos+numberRecords}}
-      <button class="btn btn-dark btn-sm ml-1"><i class="fa fa-angle-double-left"></i></button>
-      <button class="btn btn-dark btn-sm ml-1"><i class="fa fa-angle-double-right"></i></button>
+      <button class="btn btn-dark btn-sm ml-1">
+        <i class="fa fa-angle-double-left"></i>
+      </button>
+      <button class="btn btn-dark btn-sm ml-1"
+              (click)="moveNext()">
+        <i class="fa fa-angle-double-right"></i>
+      </button>
 
 
     </div>

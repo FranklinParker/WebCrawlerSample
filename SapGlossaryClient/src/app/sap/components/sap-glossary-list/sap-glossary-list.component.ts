@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SapGlossary} from "../../../models/sap-glossary";
 import {SapGlossaryService} from "../../services/sap-glossary.service";
 
@@ -11,11 +11,17 @@ export class SapGlossaryListComponent implements OnInit {
   @Input('sapGlossaries') sapGlossaries:SapGlossary[] = [];
   @Input('startPos') startPos;
   @Input('numberRecords') numberRecords;
+  @Output('moveNext') moveNextEvent = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
 
+
+  }
+
+  moveNext(){
+    this.moveNextEvent.emit();
 
   }
 

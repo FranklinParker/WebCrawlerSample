@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <app-sap-glossary-search
       (searchSoftwareComponentEvent)="searchSoftwareComponentEvent($event)"
-       (resetSearch)="resetSearch()">
+      (resetSearch)="resetSearch()">
 
     </app-sap-glossary-search>
 
@@ -11,7 +11,8 @@
     <app-sap-glossary-list
       [startPos]="startPos"
       [numberRecords]="numberRecords"
-      [sapGlossaries]="sapGlossaries"></app-sap-glossary-list>
+      [sapGlossaries]="sapGlossaries"
+      (moveNext)="moveNext()"></app-sap-glossary-list>
   </div>
 
 </div>

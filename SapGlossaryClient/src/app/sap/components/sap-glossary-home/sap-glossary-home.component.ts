@@ -27,6 +27,11 @@ export class SapGlossaryHomeComponent implements OnInit {
 
   }
 
+  moveNext(){
+    this.startPos += this.numberRecords;
+    this.resetSearch();
+  }
+
   resetSearch(){
     this.sapGlossaryService.getAllSapGlossary(this.startPos,this.numberRecords)
       .subscribe((records:SapGlossary[])=>{
