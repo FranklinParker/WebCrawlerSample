@@ -1,8 +1,16 @@
 <div class="container-fluid">
   <div class="row sap-detail-header m-2">
-    <div class="col-md-4">Term Header</div>
-    <div class="col-md-4">Term</div>
-    <div class="col-md-4">Software Component</div>
+    <div class="col-md-3 p-2">Term Header</div>
+    <div class="col-md-3 p-2">Term</div>
+    <div class="col-md-3 p-2">Software Component</div>
+    <div class="col-md-3 record-navigator p-2">
+      Record {{startPos}} thru {{startPos+numberRecords}}
+      <button class="btn btn-dark btn-sm ml-1"><i class="fa fa-angle-double-left"></i></button>
+      <button class="btn btn-dark btn-sm ml-1"><i class="fa fa-angle-double-right"></i></button>
+
+
+    </div>
+
   </div>
   <app-sap-glossary-detail
     *ngFor="let sapGlossary of sapGlossaries"

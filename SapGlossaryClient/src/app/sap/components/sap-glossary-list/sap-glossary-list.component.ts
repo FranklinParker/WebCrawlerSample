@@ -9,6 +9,9 @@ import {SapGlossaryService} from "../../services/sap-glossary.service";
 })
 export class SapGlossaryListComponent implements OnInit {
   @Input('sapGlossaries') sapGlossaries:SapGlossary[] = [];
+  @Input('startPos') startPos;
+  @Input('numberRecords') numberRecords;
+
   constructor() { }
 
   ngOnInit() {
