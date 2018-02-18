@@ -49,4 +49,21 @@ export class SapGlossaryService {
 
       });
   }
+  //findByTermLike
+  /**
+   * Find sap Glossary records where the term is like
+   *
+   * @param {string} term
+   * @returns {Observable<SapGlossary[]>}
+   */
+  findByTermLike(term:string ): Observable<SapGlossary []> {
+    console.log('term:' + term);
+
+    return this.http.get(this.url + '/findByTermLike/' + term)
+      .map((response: { status: string, records: SapGlossary [] }) => {
+        console.log(response.records);
+        return response.records;
+
+      });
+  }
 }

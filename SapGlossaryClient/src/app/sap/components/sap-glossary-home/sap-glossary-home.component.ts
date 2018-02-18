@@ -18,6 +18,27 @@ export class SapGlossaryHomeComponent implements OnInit {
 
   }
 
+  /**
+   *
+   *
+   *
+   * @param {string} term
+   */
+  searchTermEvent(term:string){
+    console.log('searchTermEvent($event):'+ term);
+    this.sapGlossaryService.findByTermLike(term)
+      .subscribe((records:SapGlossary[])=>{
+        this.sapGlossaries = records;
+      });
+
+
+  }
+  /**
+   *
+   *
+   *
+   * @param {string} softwareComponent
+   */
   searchSoftwareComponentEvent(softwareComponent: string){
     console.log('searchSoftwareComponentEvent($event):'+ softwareComponent);
     this.sapGlossaryService.findBySoftwareComponent(softwareComponent)

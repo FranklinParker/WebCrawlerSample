@@ -66,7 +66,7 @@ const findSapGlossariesBySoftwareComponent = (softwareComponent) => {
  * @param limit
  */
 
-const findSapGlossariesByTermLike = (term) => {
+const findByTermLike = (term) => {
 	return SapGlossary.findAll(
 		{
 			where: {
@@ -86,6 +86,7 @@ const findSapGlossariesByTermLike = (term) => {
 
 module.exports.sapGlossarySqlDb = {
 	findSapGlossariesByStartLimit,
-	findSapGlossariesBySoftwareComponent
+	findSapGlossariesBySoftwareComponent,
+	findByTermLike
 }
 

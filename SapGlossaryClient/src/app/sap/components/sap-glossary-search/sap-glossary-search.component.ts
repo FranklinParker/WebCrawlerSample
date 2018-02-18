@@ -9,10 +9,13 @@ import {SapGlossary} from "../../../models/sap-glossary";
 })
 export class SapGlossarySearchComponent implements OnInit {
   softwareComponent ='BC-ABA';
+  term = '';
   sapGlossary:SapGlossary;
   showSearch = false;
 
   @Output('searchSoftwareComponentEvent') searchSoftwareComponentEvent = new EventEmitter();
+  @Output('termSearchEvent') termSearchEvent = new EventEmitter();
+
   @Output('resetSearch') resetSearch = new EventEmitter();
 
 
@@ -31,6 +34,9 @@ export class SapGlossarySearchComponent implements OnInit {
 
   reset(){
     this.resetSearch.emit();
+  }
+  searchByTerm(){
+    this.termSearchEvent.emit(this.term);
   }
 
 }
