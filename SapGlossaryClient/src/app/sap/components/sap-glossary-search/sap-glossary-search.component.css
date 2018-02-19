@@ -1,8 +1,18 @@
 p{
   color: blue;
-  font-size: 16Px;
+  font-size: 14Px;
 }
 
 h5 {
   font-size: 24px;
 }
+
+.search-label{
+  font-size: 16px;
+}
+
+.search-criteria{
+  color: blue;
+}
+
+
