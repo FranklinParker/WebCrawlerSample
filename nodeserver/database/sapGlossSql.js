@@ -74,7 +74,6 @@ const findByTermLike = (term) => {
 					[Op.like]: term+'%'
 				}
 			},
-			limit: 50
 		}).then((records) => {
 		let sapGlossaries = [];
 		records.forEach((record) => {

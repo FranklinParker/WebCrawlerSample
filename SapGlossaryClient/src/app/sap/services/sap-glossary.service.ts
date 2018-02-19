@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map';
@@ -8,6 +8,8 @@ import {SapGlossary} from "../../models/sap-glossary";
 @Injectable()
 export class SapGlossaryService {
   url = environment.serverUrl + 'api/sap';
+  refreshRecordsEvent = new EventEmitter();
+
 
   constructor(private http: HttpClient) {
   }
@@ -27,6 +29,12 @@ export class SapGlossaryService {
     return this.http.get(this.url +
       `/findByOffsetAndNumberRecords/${startPos}/${numberRecords}`)
       .map((response:{ status:string, records: SapGlossary []})=>{
+        this.refreshRecordsEvent.emit({
+          EventName: 'all',
+          records: response.records,
+          startPosition: startPos,
+          endPosition: numberRecords
+        });
         return response.records;
 
       });
@@ -44,7 +52,12 @@ export class SapGlossaryService {
     return this.http.get(this.url + '/findBySoftwareComponent/' +
       softwareComponent)
       .map((response: { status: string, records: SapGlossary [] }) => {
-        console.log(response.records);
+        this.refreshRecordsEvent.emit({
+          EventName: 'softwareComponent',
+          records: response.records,
+          startPosition: 0,
+          endPosition: 25
+        });
         return response.records;
 
       });
@@ -61,7 +74,12 @@ export class SapGlossaryService {
 
     return this.http.get(this.url + '/findByTermLike/' + term)
       .map((response: { status: string, records: SapGlossary [] }) => {
-        console.log(response.records);
+        this.refreshRecordsEvent.emit({
+          EventName: 'term',
+          records: response.records,
+          startPosition: 0,
+          endPosition: 25
+        });
         return response.records;
 
       });

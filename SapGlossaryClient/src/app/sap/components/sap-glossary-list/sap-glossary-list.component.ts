@@ -8,17 +8,28 @@ import {SapGlossaryService} from "../../services/sap-glossary.service";
   styleUrls: ['./sap-glossary-list.component.css']
 })
 export class SapGlossaryListComponent implements OnInit {
-  @Input('sapGlossaries') sapGlossaries:SapGlossary[] = [];
-  @Input('startPos') startPos;
-  @Input('numberRecords') numberRecords;
+  sapGlossaries:SapGlossary[] = [];
+  startPos =0;
+  numberRecords = 0;
+  recordFilterMode = 'all';
   @Output('moveNext') moveNextEvent = new EventEmitter();
   @Output('moveBack') moveBackEvent = new EventEmitter();
 
 
-  constructor() { }
+  constructor(private sapGlossaryService:SapGlossaryService) { }
 
   ngOnInit() {
+    this.sapGlossaryService.refreshRecordsEvent.subscribe((event)=>{
+         console.log('refresh event:' + event.EventName+ ' sapGlossaries', this.sapGlossaries);
+        this.sapGlossaries = event.records;
+        this.recordFilterMode = event.EventName;
+        this.startPos = event.startPosition;
+        this.numberRecords = event.endPosition;
+      });
 
+  }
+
+  resetRecordFilter(){
 
   }
 
