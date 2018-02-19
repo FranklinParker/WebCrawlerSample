@@ -12,12 +12,11 @@ export class SapGlossarySearchComponent implements OnInit {
   term = '';
   sapGlossary:SapGlossary;
   showSearch = false;
-  searchType = 'All Records'
+  searchType = 'All Records';
 
   @Output('searchSoftwareComponentEvent') searchSoftwareComponentEvent = new EventEmitter();
   @Output('termSearchEvent') termSearchEvent = new EventEmitter();
   @Output('blankTextSearchEvent') blankTextSearchEvent = new EventEmitter();
-
   @Output('resetSearch') resetSearch = new EventEmitter();
 
 
@@ -38,19 +37,32 @@ export class SapGlossarySearchComponent implements OnInit {
 
   }
 
+  /**
+   * get all records
+   *
+   */
   reset(){
     this.resetSearch.emit();
     this.showSearch = false;
-    this.searchType = 'All Records'
-
+    this.searchType = 'All Records';
 
   }
+
+  /***
+   * search by term
+   *
+   *
+   */
   searchByTerm(){
     this.termSearchEvent.emit(this.term);
     this.searchType = `Search Where Term Starts with ${this.term}`
     this.showSearch = false;
   }
 
+  /**
+   * search for blank text
+   *
+   */
   searchForBlankText(){
     this.blankTextSearchEvent.emit();
     this.searchType = 'Search Where Text is blank';

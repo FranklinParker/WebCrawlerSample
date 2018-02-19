@@ -14,6 +14,13 @@ export class SapGlossaryService {
   constructor(private http: HttpClient) {
   }
 
+  /***
+   *
+   * get by id
+   *
+   * @param {string} id
+   * @returns {Observable<any>}
+   */
   getById(id: string): Observable<any> {
     return this.http.get(this.url + '/getById/' + id);
 
