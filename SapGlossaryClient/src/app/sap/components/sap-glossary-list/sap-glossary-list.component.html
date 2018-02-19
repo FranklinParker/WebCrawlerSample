@@ -13,14 +13,14 @@
               (click)="moveNext()">
         <i class="fa fa-angle-double-right"></i>
       </button>
-      <p> Page </p>
+      <p> of {{totalRecords}} Records </p>
 
 
     </div>
 
   </div>
   <app-sap-glossary-detail
-    *ngFor="let sapGlossary of sapGlossaries"
+    *ngFor="let sapGlossary of filteredSapGlossaries"
     [sapGlossary]="sapGlossary"></app-sap-glossary-detail>
 
 </div>

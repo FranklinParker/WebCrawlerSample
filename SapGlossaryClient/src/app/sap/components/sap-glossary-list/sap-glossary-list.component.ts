@@ -9,9 +9,12 @@ import {SapGlossaryService} from "../../services/sap-glossary.service";
 })
 export class SapGlossaryListComponent implements OnInit {
   sapGlossaries:SapGlossary[] = [];
+  filteredSapGlossaries:SapGlossary[] = [];
   startPos =0;
   numberRecords = 0;
+  totalRecords = 0;
   recordFilterMode = 'all';
+
   @Output('moveNext') moveNextEvent = new EventEmitter();
   @Output('moveBack') moveBackEvent = new EventEmitter();
 
@@ -25,16 +28,33 @@ export class SapGlossaryListComponent implements OnInit {
         this.recordFilterMode = event.EventName;
         this.startPos = event.startPosition;
         this.numberRecords = event.endPosition;
+        this.resetRecordFilter();
       });
 
   }
 
   resetRecordFilter(){
+    if(this.recordFilterMode==='all'){
+      this.filteredSapGlossaries = this.sapGlossaries;
+    }
+    else if(this.sapGlossaries.length> this.numberRecords ){
+      this.filteredSapGlossaries = this.sapGlossaries.slice(this.startPos,
+           this.numberRecords);
+      this.totalRecords = this.sapGlossaries.length;
 
+    }
   }
 
   moveNext(){
-    this.moveNextEvent.emit();
+    if(this.recordFilterMode==='all') {
+      this.moveNextEvent.emit();
+    }else{
+      if(this.sapGlossaries.length> (this.startPos+ this.numberRecords)){
+        this.startPos+= this.numberRecords;
+        this.filteredSapGlossaries = this.sapGlossaries.slice(this.startPos,
+          this.startPos+this.numberRecords);
+      }
+    }
 
   }
 
