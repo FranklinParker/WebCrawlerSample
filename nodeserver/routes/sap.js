@@ -91,6 +91,22 @@ router.get('/findBySoftwareComponent/:softwareComponent', function (req, res) {
 		});
 });
 
+router.get('/findWhereTextBlank', function (req, res) {
+
+	sapSqlDB.findWhereTextBlank()
+		.then((records)=> {
+			res.status(200).json({
+				status: 'success',
+				records: records
+			});
+		},(err)=>{
+			console.log('err', err);
+			res.status(200).json({
+				status: 'failed'
+			});
+
+		});
+});
 
 
 module.exports = router;

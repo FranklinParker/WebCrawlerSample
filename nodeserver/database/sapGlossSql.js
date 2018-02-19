@@ -45,8 +45,9 @@ const findSapGlossariesByStartLimit = (startPos, number) => {
 const findSapGlossariesBySoftwareComponent = (softwareComponent) => {
 
 	return SapGlossary.findAll(
-		{ where: {
-				softwareComponent:  softwareComponent
+		{
+			where: {
+				softwareComponent: softwareComponent
 
 			}
 		}).then((records) => {
@@ -55,23 +56,20 @@ const findSapGlossariesBySoftwareComponent = (softwareComponent) => {
 			sapGlossaries.push(record.dataValues);
 		});
 		return sapGlossaries;
-	}, err=> console.log(err));
+	}, err => console.log(err));
 }
 
-
-/***
+/**
  * find where term like
  *
  * @param term
- * @param limit
  */
-
 const findByTermLike = (term) => {
 	return SapGlossary.findAll(
 		{
 			where: {
 				term: {
-					[Op.like]: term+'%'
+					[Op.like]: term + '%'
 				}
 			},
 		}).then((records) => {
@@ -80,12 +78,51 @@ const findByTermLike = (term) => {
 			sapGlossaries.push(record.dataValues);
 		});
 		return sapGlossaries;
-	}, err=> console.log(err));
+	}, err => console.log(err));
 }
+/***
+ * find where text is blank
+ *
+ */
+
+const findWhereTextBlank = () => {
+	return SapGlossary.findAll(
+		{
+			where: {
+				text: {
+					[Op.eq]: ''
+				},
+			}
+		}).then((records) => {
+		let sapGlossaries = [];
+		records.forEach((record) => {
+			sapGlossaries.push(record.dataValues);
+		});
+		return sapGlossaries;
+	}, err => console.log(err));
+}
+/***
+ * find where text is blank
+ *
+ */
+
+const findWhereTextBlankOld = () => {
+	return sequelize.query('SELECT * FROM SapGlossaries where  length(text)=0',
+	)
+		.then(records => {
+				let sapGlossaries = [];
+				records.forEach((record) => {
+					sapGlossaries.push(record.dataValues);
+				});
+				return sapGlossaries;
+			}, err => console.log(err)
+		);
+}
+
 
 module.exports.sapGlossarySqlDb = {
 	findSapGlossariesByStartLimit,
 	findSapGlossariesBySoftwareComponent,
-	findByTermLike
+	findByTermLike,
+	findWhereTextBlank
 }
-

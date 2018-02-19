@@ -84,4 +84,26 @@ export class SapGlossaryService {
 
       });
   }
+
+  /**
+   * Search where text blank
+   *
+   * @returns {Observable<SapGlossary[]>}
+   */
+  findWhereTextBlank(): Observable<SapGlossary []> {
+
+    return this.http.get(this.url + '/findWhereTextBlank')
+      .map((response: { status: string, records: SapGlossary [] }) => {
+        console.log('searchTextBlank',response.records);
+        this.refreshRecordsEvent.emit({
+          EventName: 'searchTextBlank',
+          records: response.records,
+          startPosition: 0,
+          endPosition: 25
+        });
+        return response.records;
+
+      });
+  }
+
 }

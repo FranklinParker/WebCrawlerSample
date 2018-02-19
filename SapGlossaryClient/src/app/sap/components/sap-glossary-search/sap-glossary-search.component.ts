@@ -15,6 +15,7 @@ export class SapGlossarySearchComponent implements OnInit {
 
   @Output('searchSoftwareComponentEvent') searchSoftwareComponentEvent = new EventEmitter();
   @Output('termSearchEvent') termSearchEvent = new EventEmitter();
+  @Output('blankTextSearchEvent') blankTextSearchEvent = new EventEmitter();
 
   @Output('resetSearch') resetSearch = new EventEmitter();
 
@@ -37,6 +38,10 @@ export class SapGlossarySearchComponent implements OnInit {
   }
   searchByTerm(){
     this.termSearchEvent.emit(this.term);
+  }
+
+  searchForBlankText(){
+    this.blankTextSearchEvent.emit();
   }
 
 }

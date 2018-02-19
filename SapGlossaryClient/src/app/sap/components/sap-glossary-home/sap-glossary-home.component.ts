@@ -15,7 +15,6 @@ export class SapGlossaryHomeComponent implements OnInit {
 
   ngOnInit() {
     this.resetSearch();
-
   }
 
   /**
@@ -40,12 +39,17 @@ export class SapGlossaryHomeComponent implements OnInit {
    * @param {string} softwareComponent
    */
   searchSoftwareComponentEvent(softwareComponent: string){
-    console.log('searchSoftwareComponentEvent($event):'+ softwareComponent);
     this.sapGlossaryService.findBySoftwareComponent(softwareComponent)
       .subscribe((records:SapGlossary[])=>{
         this.sapGlossaries = records;
       });
 
+  }
+  searchForBlankText(){
+    this.sapGlossaryService.findWhereTextBlank()
+      .subscribe((records:SapGlossary[])=>{
+        this.sapGlossaries = records;
+      });
   }
 
   moveNext(){
