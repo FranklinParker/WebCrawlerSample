@@ -101,24 +101,6 @@ const findWhereTextBlank = () => {
 		return sapGlossaries;
 	}, err => console.log(err));
 }
-/***
- * find where text is blank
- *
- */
-
-const findWhereTextBlankOld = () => {
-	return sequelize.query('SELECT * FROM SapGlossaries where  length(text)=0',
-	)
-		.then(records => {
-				let sapGlossaries = [];
-				records.forEach((record) => {
-					sapGlossaries.push(record.dataValues);
-				});
-				return sapGlossaries;
-			}, err => console.log(err)
-		);
-}
-
 
 module.exports.sapGlossarySqlDb = {
 	findSapGlossariesByStartLimit,
