@@ -26,7 +26,9 @@ export class SapGlossaryListComponent implements OnInit {
         this.sapGlossaries = event.records;
         this.recordFilterMode = event.EventName;
         this.startPos = event.startPosition;
-        this.numberRecords = event.endPosition;
+        this.numberRecords = event.totalRecords >event.endPosition?
+                      event.endPosition:event.totalRecords;
+        this.totalRecords = event.totalRecords;
         this.resetRecordFilter();
       });
 
@@ -43,7 +45,6 @@ export class SapGlossaryListComponent implements OnInit {
     else if(this.sapGlossaries.length> this.numberRecords ){
       this.filteredSapGlossaries = this.sapGlossaries.slice(this.startPos,
            this.numberRecords);
-      this.totalRecords = this.sapGlossaries.length;
 
     } else{
       this.filteredSapGlossaries = this.sapGlossaries;

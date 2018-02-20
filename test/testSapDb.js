@@ -8,11 +8,11 @@ const sapGlossarySqlDb  = require('../database/sapGlossSql').sapGlossarySqlDb;
 // 	});
 const runDemo = async ()=>
 {
+	const count = await sapGlossarySqlDb.findSapGlossaryRecordCount();
 
-
-	const count = await
-	sapGlossarySqlDb.findSapGlossaryRecordCount();
 	console.log('count:' + count);
+	const records =  await sapGlossarySqlDb.findSapGlossaryRange(0,10);
+	console.log('records', records);
 }
 
 runDemo();

@@ -35,12 +35,13 @@ export class SapGlossaryService {
   getAllSapGlossary(startPos,numberRecords): Observable<SapGlossary []> {
     return this.http.get(this.url +
       `/findByOffsetAndNumberRecords/${startPos}/${numberRecords}`)
-      .map((response:{ status:string, records: SapGlossary []})=>{
+      .map((response:{ status:string, records: SapGlossary [], totalRecords: number})=>{
         this.refreshRecordsEvent.emit({
           EventName: 'all',
           records: response.records,
           startPosition: startPos,
-          endPosition: numberRecords
+          endPosition: numberRecords,
+          totalRecords: response.totalRecords
         });
         return response.records;
 
@@ -63,7 +64,8 @@ export class SapGlossaryService {
           EventName: 'softwareComponent',
           records: response.records,
           startPosition: 0,
-          endPosition: 25
+          endPosition: 25,
+          totalRecords: response.records.length
         });
         return response.records;
 
@@ -85,7 +87,9 @@ export class SapGlossaryService {
           EventName: 'term',
           records: response.records,
           startPosition: 0,
-          endPosition: 25
+          endPosition: 25,
+          totalRecords: response.records.length
+
         });
         return response.records;
 
@@ -106,7 +110,9 @@ export class SapGlossaryService {
           EventName: 'searchTextBlank',
           records: response.records,
           startPosition: 0,
-          endPosition: 25
+          endPosition: 25,
+          totalRecords: response.records.length
+
         });
         return response.records;
 
@@ -128,7 +134,9 @@ export class SapGlossaryService {
           EventName: 'searchTextLike',
           records: response.records,
           startPosition: 0,
-          endPosition: 25
+          endPosition: 25,
+          totalRecords: response.records.length
+
         });
         return response.records;
 

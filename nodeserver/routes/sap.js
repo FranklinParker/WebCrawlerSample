@@ -28,24 +28,18 @@ router.get('/getById/:id', function (req, res) {
 });
 
 
-router.get('/findByOffsetAndNumberRecords/:offset/:number', function (req, res) {
+router.get('/findByOffsetAndNumberRecords/:offset/:number', async  (req, res) => {
 	const offset = req.params.offset;
 	const number = req.params.number;
 	console.log('offset:'+ offset+':number' + number);
 
-	sapSqlDB.findSapGlossariesByStartLimit(offset, number)
-		.then((records)=> {
-			res.status(200).json({
-				status: 'success',
-				records: records
-			});
-		},(err)=>{
-			console.log('err', err);
-			res.status(200).json({
-				status: 'failed'
-			});
-
-		});
+	const recordCount = await sapSqlDB.findSapGlossaryRecordCount();
+	const records = await sapSqlDB.findSapGlossariesByStartLimit(offset, number);
+	res.status(200).json({
+		status: 'success',
+		records: records,
+		totalRecords: recordCount
+	});
 });
 /**
  *

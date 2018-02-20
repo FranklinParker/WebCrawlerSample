@@ -26,7 +26,7 @@ const SapGlossary = sequelize.define('SapGlossary', {
 
 });
 
-const findSapGlossariesByStartLimit = (startPos, number) => {
+const findSapGlossariesByStartLimit = async (startPos, number) => {
 	return SapGlossary.findAll(
 		{
 			attributes: ['id', 'termHeader', 'term', 'url', 'softwareComponent', 'text', 'updatedAt'],
@@ -124,11 +124,24 @@ const findByTermLike = (term) => {
 	}, err => console.log(err));
 }
 
+const findSapGlossaryRecordCount = async () => {
+	return SapGlossary.findAll(
+		{
+			attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'count_id']]
+		}).then((count) => {
+		if(!count || count.length<1){
+			return 0;
+		}else {
+			return count[0].dataValues.count_id;
+		}
+	});
+}
 
 module.exports.sapGlossarySqlDb = {
 	findSapGlossariesByStartLimit,
 	findSapGlossariesBySoftwareComponent,
 	findByTextLike,
 	findByTermLike,
-	findWhereTextBlank
+	findWhereTextBlank,
+	findSapGlossaryRecordCount
 }
