@@ -64,6 +64,21 @@ const findSapGlossaryRange = (startPos, number) => {
 	});
 }
 
+const findSapGlossaryRecordCount = async () => {
+	return SapGlossary.findAll(
+		{
+			attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'count_id']]
+		}).then((count) => {
+			 if(!count || count.length<1){
+			 	return 0;
+			 }else {
+				 return count[0].dataValues.count_id;
+			 }
+	});
+}
+
+
+
 const findByTermLike = (term) => {
 	return SapGlossary.findAll(
 		{
@@ -85,6 +100,8 @@ const findByTermLike = (term) => {
 module.exports.sapGlossarySqlDb = {
 	insertSapGlossary,
 	findSapGlossaryRange,
-	findByTermLike
+	findByTermLike,
+	findSapGlossaryRecordCount
 }
+
 

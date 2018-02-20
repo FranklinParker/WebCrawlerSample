@@ -1,4 +1,4 @@
-const {sapGlossarySqlDb } = require('../database/sapGlossSql');
+const sapGlossarySqlDb  = require('../database/sapGlossSql').sapGlossarySqlDb;
 
 // sapGlossarySqlDb.findSapGlossaryRange(50,5)
 // 	.then((records)=>{
@@ -6,10 +6,14 @@ const {sapGlossarySqlDb } = require('../database/sapGlossSql');
 // 		console.log('counts:' + records.length);
 //
 // 	});
-sapGlossarySqlDb.findByTerm('ABAP')
-	.then((records)=>{
-		console.log('found sapGlossary:' , records);
-		console.log('record count ', records.length);
+const runDemo = async ()=>
+{
 
-	});
+
+	const count = await
+	sapGlossarySqlDb.findSapGlossaryRecordCount();
+	console.log('count:' + count);
+}
+
+runDemo();
 

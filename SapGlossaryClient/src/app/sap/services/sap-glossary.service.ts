@@ -124,7 +124,6 @@ export class SapGlossaryService {
 
     return this.http.get(this.url + '/findWhereTextLike', {params:params})
       .map((response: { status: string, records: SapGlossary [] }) => {
-        console.log('searchTextLike',response.records);
         this.refreshRecordsEvent.emit({
           EventName: 'searchTextLike',
           records: response.records,
