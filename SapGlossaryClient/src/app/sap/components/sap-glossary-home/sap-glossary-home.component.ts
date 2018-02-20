@@ -66,6 +66,12 @@ export class SapGlossaryHomeComponent implements OnInit {
     this.resetSearch();
   }
 
+  searchTextLike(text: string){
+    this.sapGlossaryService.findWhereTextLike(text)
+      .subscribe((records:SapGlossary[])=>{
+        this.sapGlossaries = records;
+      });
+  }
   resetSearch(){
     this.sapGlossaryService.getAllSapGlossary(this.startPos,this.numberRecords)
       .subscribe((records:SapGlossary[])=>{

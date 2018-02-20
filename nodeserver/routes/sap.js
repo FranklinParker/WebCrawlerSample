@@ -108,8 +108,9 @@ router.get('/findWhereTextBlank', function (req, res) {
 		});
 });
 
-router.get('/findWhereTextLike/:text', function (req, res) {
-	const text = req.params.text;
+router.get('/findWhereTextLike', function (req, res) {
+	const text = req.query.text;
+	console.log('text:' + text);
 	sapSqlDB.findByTextLike(text)
 		.then((records)=> {
 			res.status(200).json({

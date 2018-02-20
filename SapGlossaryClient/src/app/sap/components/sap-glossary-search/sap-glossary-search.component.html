@@ -15,7 +15,7 @@
 </div>
 <!-- end of topHeader-->
 <div class="container-fluid" *ngIf="showSearch">
-  <div class="card" id="softwareComponentSearch">
+  <div class="card m-1" id="softwareComponentSearch">
     <div class="card-header">
       <h5>Software Component Search</h5>
     </div>
@@ -34,7 +34,7 @@
     </div>
   </div>
   <!-- end of softwareComponentSearch-->
-  <div class="card" id="termSearch">
+  <div class="card m-1" id="termSearch">
     <div class="card-header">
       <h5>Term Search</h5>
     </div>
@@ -53,7 +53,26 @@
     </div>
   </div>
   <!-- end of term search -->
-  <div class="card" id="blankTextSearch">
+  <div class="card m-1" id="textLikeSearch">
+    <div class="card-header">
+      <h5>Text Search</h5>
+    </div>
+    <div class="card-body">
+      <div class="form-group">
+        <input
+          type="text"
+          [(ngModel)]="text"
+          class="form-control form-control-sm"
+          name="text">
+      </div>
+      <button class="btn btn-primary btn-outline-success btn-sm"
+              type="button" (click)="searchTextLike()">
+        Search By Text Like (add %)
+      </button>
+    </div>
+  </div>
+  <!-- end of textLikeSearch  -->
+  <div class="card m-1" id="blankTextSearch">
       <div class="card-header">
         <h5>Search for Blank Text </h5>
       </div>

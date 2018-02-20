@@ -23,7 +23,6 @@ export class SapGlossaryListComponent implements OnInit {
 
   ngOnInit() {
     this.sapGlossaryService.refreshRecordsEvent.subscribe((event)=>{
-         console.log('refresh event:' + event.EventName+ ' sapGlossaries', this.sapGlossaries);
         this.sapGlossaries = event.records;
         this.recordFilterMode = event.EventName;
         this.startPos = event.startPosition;
@@ -33,6 +32,10 @@ export class SapGlossaryListComponent implements OnInit {
 
   }
 
+  /**
+   *
+   *
+   */
   resetRecordFilter(){
     if(this.recordFilterMode==='all'){
       this.filteredSapGlossaries = this.sapGlossaries;
@@ -42,6 +45,8 @@ export class SapGlossaryListComponent implements OnInit {
            this.numberRecords);
       this.totalRecords = this.sapGlossaries.length;
 
+    } else{
+      this.filteredSapGlossaries = this.sapGlossaries;
     }
   }
 

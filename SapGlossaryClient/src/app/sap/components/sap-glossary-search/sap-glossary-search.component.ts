@@ -1,6 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {SapGlossaryService} from "../../services/sap-glossary.service";
-import {SapGlossary} from "../../../models/sap-glossary";
 
 @Component({
   selector: 'app-sap-glossary-search',
@@ -10,13 +9,14 @@ import {SapGlossary} from "../../../models/sap-glossary";
 export class SapGlossarySearchComponent implements OnInit {
   softwareComponent ='BC-ABA';
   term = '';
-  sapGlossary:SapGlossary;
+  text ='';
   showSearch = false;
   searchType = 'All Records';
 
   @Output('searchSoftwareComponentEvent') searchSoftwareComponentEvent = new EventEmitter();
   @Output('termSearchEvent') termSearchEvent = new EventEmitter();
   @Output('blankTextSearchEvent') blankTextSearchEvent = new EventEmitter();
+  @Output('textLikeSearchEvent') textLikeSearchEvent = new EventEmitter();
   @Output('resetSearch') resetSearch = new EventEmitter();
 
 
@@ -68,6 +68,15 @@ export class SapGlossarySearchComponent implements OnInit {
     this.searchType = 'Search Where Text is blank';
 
     this.showSearch = false;
+
+  }
+
+  searchTextLike(){
+    this.textLikeSearchEvent.emit(this.text);
+    this.searchType = 'Search Where Text like ' +this.text;
+
+    this.showSearch = false;
+
 
   }
 

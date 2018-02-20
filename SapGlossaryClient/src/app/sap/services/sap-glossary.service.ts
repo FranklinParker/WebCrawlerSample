@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 import {environment} from "../../../environments/environment";
@@ -119,8 +119,10 @@ export class SapGlossaryService {
    * @returns {Observable<SapGlossary[]>}
    */
   findWhereTextLike(text): Observable<SapGlossary []> {
+    let params = new HttpParams();
+    params = params.append('text', text);
 
-    return this.http.get(this.url + '/findWhereTextLike/' + text)
+    return this.http.get(this.url + '/findWhereTextLike', {params:params})
       .map((response: { status: string, records: SapGlossary [] }) => {
         console.log('searchTextLike',response.records);
         this.refreshRecordsEvent.emit({

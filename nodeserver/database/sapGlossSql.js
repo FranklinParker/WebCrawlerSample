@@ -111,7 +111,7 @@ const findByTermLike = (term) => {
 	return SapGlossary.findAll(
 		{
 			where: {
-				text: {
+				term: {
 					[Op.like]: term +'%'
 				},
 			}
