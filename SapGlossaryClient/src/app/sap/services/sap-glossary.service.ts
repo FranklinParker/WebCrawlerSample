@@ -113,4 +113,25 @@ export class SapGlossaryService {
       });
   }
 
+  /**
+   * Search where text like
+   *
+   * @returns {Observable<SapGlossary[]>}
+   */
+  findWhereTextLike(text): Observable<SapGlossary []> {
+
+    return this.http.get(this.url + '/findWhereTextLike/' + text)
+      .map((response: { status: string, records: SapGlossary [] }) => {
+        console.log('searchTextLike',response.records);
+        this.refreshRecordsEvent.emit({
+          EventName: 'searchTextLike',
+          records: response.records,
+          startPosition: 0,
+          endPosition: 25
+        });
+        return response.records;
+
+      });
+  }
+
 }

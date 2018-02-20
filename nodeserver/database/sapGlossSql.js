@@ -64,12 +64,12 @@ const findSapGlossariesBySoftwareComponent = (softwareComponent) => {
  *
  * @param term
  */
-const findByTermLike = (term) => {
+const findByTextLike = (text) => {
 	return SapGlossary.findAll(
 		{
 			where: {
-				term: {
-					[Op.like]: term + '%'
+				text: {
+					[Op.like]: text
 				}
 			},
 		}).then((records) => {
@@ -102,9 +102,33 @@ const findWhereTextBlank = () => {
 	}, err => console.log(err));
 }
 
+/***
+ * find where text is blank
+ *
+ */
+
+const findByTermLike = (term) => {
+	return SapGlossary.findAll(
+		{
+			where: {
+				text: {
+					[Op.like]: term +'%'
+				},
+			}
+		}).then((records) => {
+		let sapGlossaries = [];
+		records.forEach((record) => {
+			sapGlossaries.push(record.dataValues);
+		});
+		return sapGlossaries;
+	}, err => console.log(err));
+}
+
+
 module.exports.sapGlossarySqlDb = {
 	findSapGlossariesByStartLimit,
 	findSapGlossariesBySoftwareComponent,
+	findByTextLike,
 	findByTermLike,
 	findWhereTextBlank
 }

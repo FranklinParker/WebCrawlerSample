@@ -108,5 +108,23 @@ router.get('/findWhereTextBlank', function (req, res) {
 		});
 });
 
+router.get('/findWhereTextLike/:text', function (req, res) {
+	const text = req.params.text;
+	sapSqlDB.findByTextLike(text)
+		.then((records)=> {
+			res.status(200).json({
+				status: 'success',
+				records: records
+			});
+		},(err)=>{
+			console.log('err', err);
+			res.status(200).json({
+				status: 'failed'
+			});
+
+		});
+});
+
+
 
 module.exports = router;
