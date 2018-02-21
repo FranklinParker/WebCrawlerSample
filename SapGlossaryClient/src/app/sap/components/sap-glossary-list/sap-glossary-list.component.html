@@ -3,17 +3,17 @@
     <div class="col-md-2 p-2">Software Component</div>
     <div class="col-md-3 p-2">Term Header</div>
     <div class="col-md-2 p-2">Term</div>
-    <div class="col-md-5 record-navigator p-2">
-      Record {{startPos}} thru {{startPos+numberRecords}}
-      <button class="btn btn-dark btn-sm ml-1"
-              (click)="moveBack()">
-        <i class="fa fa-angle-double-left"></i>
-      </button>
-      <button class="btn btn-dark btn-sm ml-1"
-              (click)="moveNext()">
-        <i class="fa fa-angle-double-right"></i>
-      </button>
-      of {{totalRecords}} Records
+    <div class="col-md-5 bg-dark record-navigator p-2">
+        Record {{startPos}} thru {{startPos+numberRecords}}
+        <button class="btn btn-dark btn-sm ml-1"
+                (click)="moveBack()">
+          <i class="fa fa-angle-double-left"></i>
+        </button>
+        <button class="btn btn-dark btn-sm ml-1"
+                (click)="moveNext()">
+          <i class="fa fa-angle-double-right"></i>
+        </button>
+        of {{totalRecords}} Records
 
 
     </div>
