@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../../environments/environment";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
-import {SapGlossary} from "../../models/sap-glossary";
 
 @Injectable()
 export class SapHelpSearchService {
@@ -10,7 +9,7 @@ export class SapHelpSearchService {
   constructor(private http: HttpClient) { }
 
   /**
-   * calls sap help end point
+   * calls api on server to search sap help
    *
    *
    * @param helpSearch
