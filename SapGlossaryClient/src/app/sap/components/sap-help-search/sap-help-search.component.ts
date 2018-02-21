@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sap-help-search.component.css']
 })
 export class SapHelpSearchComponent implements OnInit {
-
+  helpSearch = ''
   constructor() { }
 
   ngOnInit() {
   }
 
+  searchSapHelp(){
+    console.log('search:' + this.helpSearch);
+
+  }
 }

@@ -1,3 +1,18 @@
-<p>
-  sap-help-search works!
-</p>
+<div class="card m-1" id="sapHelpSearch">
+  <div class="card-header">
+    <h5>Search Sap Help </h5>
+  </div>
+  <div class="card-body">
+    <div class="form-group">
+      <input
+        type="text"
+        [(ngModel)]="helpSearch"
+        class="form-control form-control-sm"
+        name="text">
+    </div>
+    <button class="btn btn-primary btn-outline-success btn-sm"
+            type="button" (click)="searchSapHelp()">Search Sap Help
+    </button>
+
+  </div>
+</div>
