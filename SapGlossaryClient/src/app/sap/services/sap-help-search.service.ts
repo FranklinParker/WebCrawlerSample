@@ -6,21 +6,20 @@ import {SapGlossary} from "../../models/sap-glossary";
 
 @Injectable()
 export class SapHelpSearchService {
-  sapHelpBaseUrl = environment.sapHelpBaseUrl;
-
+  url = environment.serverUrl + 'api/saphelp';
   constructor(private http: HttpClient) { }
 
+  /**
+   * calls sap help end point
+   *
+   *
+   * @param helpSearch
+   * @returns {Observable<any>}
+   */
   findSapHelp(helpSearch): Observable<any> {
-    let params = new HttpParams();
-    //q=BPM&language=en-US&state=PRODUCTION
-    params = params.append('q', helpSearch);
-    params = params.append('language', 'en-US');
-    params = params.append('state', 'PRODUCTION');
-
-
-    return this.http.get(this.sapHelpBaseUrl , {params:params})
+    return this.http.get(this.url + '/findHelpBy/' + helpSearch )
       .map((response) => {
-        return response
+        return response;
       });
   }
 
