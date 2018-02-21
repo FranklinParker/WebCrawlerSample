@@ -1,5 +1,7 @@
 export const environment = {
   production: true,
-  serverUrl: '/'
+  serverUrl: '/',
+  sapHelpBaseUrl: 'https://help.sap.com/http.svc/suggestion'
+
 
 };
