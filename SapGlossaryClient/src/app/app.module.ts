@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {SapModule} from "./sap/sap.module";
+import {AppRoutingModule} from "./app-routing.module";
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import {SapModule} from "./sap/sap.module";
   ],
   imports: [
     BrowserModule,
-    SapModule
+    SapModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
