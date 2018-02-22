@@ -26,7 +26,10 @@
   </button>
 </div>
 <div class="container-fluid" *ngIf="showProductSearchLinks">
-  <h1>Product Search Links</h1>
+  <app-sap-help-search-detail
+    *ngFor="let sapLink of sapProductSearchLinks.sapLinks"
+    [sapLink]="sapLink">
+  </app-sap-help-search-detail>
 </div>
 
 

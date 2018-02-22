@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {SapLink} from "../../../models/sap-link";
 
 @Component({
   selector: 'app-sap-help-search-detail',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sap-help-search-detail.component.css']
 })
 export class SapHelpSearchDetailComponent implements OnInit {
-
+  @Input('sapLink') sapLink: SapLink;
   constructor() { }
 
   ngOnInit() {
