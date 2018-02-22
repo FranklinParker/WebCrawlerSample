@@ -9,7 +9,8 @@ import {SapProductSearchLinks} from "../../../models/sap-product-search-links";
   styleUrls: ['./sap-help-search.component.css']
 })
 export class SapHelpSearchComponent implements OnInit {
-  helpSearch = ''
+  helpSearch = '';
+  showProductSearchLinks = false;
   sapContentLinks: SapContentLinks;
   sapProductSearchLinks: SapProductSearchLinks;
   constructor(private sapHelpSearchService: SapHelpSearchService) { }

@@ -9,6 +9,7 @@ import { SapGlossaryListComponent } from './components/sap-glossary-list/sap-glo
 import { SapGlossaryDetailComponent } from './components/sap-glossary-detail/sap-glossary-detail.component';
 import { SapHelpSearchComponent } from './components/sap-help-search/sap-help-search.component';
 import {SapHelpSearchService} from "./services/sap-help-search.service";
+import { SapHelpSearchDetailComponent } from './components/sap-help-search-detail/sap-help-search-detail.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import {SapHelpSearchService} from "./services/sap-help-search.service";
     SapGlossarySearchComponent,
     SapGlossaryListComponent,
     SapGlossaryDetailComponent,
-    SapHelpSearchComponent],
+    SapHelpSearchComponent,
+    SapHelpSearchDetailComponent],
   exports: [SapGlossaryHomeComponent,
     SapHelpSearchComponent],
   providers: [SapGlossaryService,

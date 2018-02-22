@@ -16,3 +16,17 @@
 
   </div>
 </div>
+
+<div class="row sap-detail-header m-2" *ngIf="sapProductSearchLinks">
+  <h4>Product Search Links</h4>
+  <button class="btn btn-sm btn-light btn-font mx-auto"
+          (click)="showProductSearchLinks=!showProductSearchLinks">
+    <i *ngIf="!showProductSearchLinks" class="fa fa-arrow-down"></i>
+    <i *ngIf="showProductSearchLinks" class="fa fa-arrow-up"></i>
+  </button>
+</div>
+<div class="container-fluid" *ngIf="showProductSearchLinks">
+  <h1>Product Search Links</h1>
+</div>
+
+
