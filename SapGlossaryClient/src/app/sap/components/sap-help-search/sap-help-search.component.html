@@ -25,11 +25,26 @@
     <i *ngIf="showProductSearchLinks" class="fa fa-arrow-up"></i>
   </button>
 </div>
-<div class="container-fluid" *ngIf="showProductSearchLinks">
+<div class="container-fluid" *ngIf="showProductSearchLinks && sapProductSearchLinks">
   <app-sap-help-search-detail
     *ngFor="let sapLink of sapProductSearchLinks.sapLinks"
     [sapLink]="sapLink" [labelName]="'Product Name:'">
   </app-sap-help-search-detail>
 </div>
 
+<div class="row sap-detail-header m-2" *ngIf="sapContentLinks">
+  <h4>Document Links</h4>
+  <button class="btn btn-sm btn-light btn-font mx-auto"
+          (click)="showDocumentLinks=!showDocumentLinks">
+    <i *ngIf="!showDocumentLinks" class="fa fa-arrow-down"></i>
+    <i *ngIf="showDocumentLinks" class="fa fa-arrow-up"></i>
+  </button>
+</div>
+
+<div class="container-fluid" *ngIf="showDocumentLinks && sapContentLinks">
+  <app-sap-help-search-detail
+    *ngFor="let sapLink of sapContentLinks.sapLinks"
+    [sapLink]="sapLink" [labelName]="'Document Link:'">
+  </app-sap-help-search-detail>
+</div>
 

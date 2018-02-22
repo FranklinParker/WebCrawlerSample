@@ -10,7 +10,9 @@ import {SapProductSearchLinks} from "../../../models/sap-product-search-links";
 })
 export class SapHelpSearchComponent implements OnInit {
   helpSearch = '';
-  showProductSearchLinks = false;
+  showProductSearchLinks = true;
+  showDocumentLinks = false;
+
   sapContentLinks: SapContentLinks;
   sapProductSearchLinks: SapProductSearchLinks;
   constructor(private sapHelpSearchService: SapHelpSearchService) { }
