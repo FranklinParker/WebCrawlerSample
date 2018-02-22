@@ -9,8 +9,8 @@ const processFuncAssesmentClient = async (client, file, sheetName)=> {
 			'Core process Final Version');
 		console.log('functionalAssmentData',functionalAssmentData);
 		console.log('functionalAssmentData.length',functionalAssmentData.length);
-		clientDB.insertClient(client, functionalAssmentData)
-			.then((result)=> console.log(result));
+		const clientNew = async = clientDB.insertClient(client, functionalAssmentData);
+		console.log('created client', clientNew);
 
 }
 

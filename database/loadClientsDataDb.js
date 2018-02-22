@@ -75,23 +75,20 @@ const FunctionAssesment = sequelize.define('FunctionAssesment', {
  * @returns {Promise<any>}
  */
 var insertClient = async (client, records) => {
-	return sequelize.sync()
-		.then(() => Client.create({
+	const seq = await sequelize.sync();
+	const clientNew = await
+		Client.create({
 			clientName: client.clientName,
 			clientCode: client.clientCode,
 			industryCode: client.industryCode
-		})
-			.then(client => {
-				//console.log(sapGlossary.toJSON());
-				const funcAss = await insertFunctionalAssesement(client.id, records[0]);
-				return client;
-			}, err => console.log(JSON.stringify(err, null, 2))));
+		});
+	return clientNew;
 
 }
 
 
-const insertFunctionalAssesement = async (clientId, funcAssesment) => {
-	 const funcAsses= await FunctionAssesment.create({
+const insertFunctionalAssesement = async  (clientId, funcAssesment) => {
+	const funcAsses =FunctionAssesment.create({
 			clientId: clientId,
 			ProcesGroupL1: funcAssesment['Process Group L1'],
 			Module: funcAssesment.Module,
@@ -112,7 +109,7 @@ const insertFunctionalAssesement = async (clientId, funcAssesment) => {
 			Observation: funcAssesment['Observation']
 		}
 	);
-	 return funcAsses;
+	return funcAsses;
 
 }
 
