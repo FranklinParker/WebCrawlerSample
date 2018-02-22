@@ -10,7 +10,8 @@ router.get('/findHelpBy/:search', async (req, res)=> {
 		const searchData = await sapHelpSearch.searchSapHelpBy(search);
 		res.status(200).json({
 			status: 'success',
-			searchData: searchData,
+			productSearchLinks: searchData.data.products,
+			contentLinks: searchData.data.content,
 			searchTerm: search
 
 		});
