@@ -8,6 +8,7 @@ import {SapLink} from "../../../models/sap-link";
 })
 export class SapHelpSearchDetailComponent implements OnInit {
   @Input('sapLink') sapLink: SapLink;
+  @Input('labelName') labelName;
   constructor() { }
 
   ngOnInit() {
