@@ -47,26 +47,7 @@ const FunctionAssesment = sequelize.define('FunctionAssesment', {
 	Observation: Sequelize.STRING(50)
 
 });
-/**
- { ID: '101',
-	 'Process Group L1': 'Forecast to Produce',
-	 Module: 'Production Planning',
-	 'Process Scenario L2': 'PP -Manufacturing Execution',
-	 'Process  Component L3': 'Discrete Manufacturing',
-	 'Process Component L4': 'Create/Change production order',
-	 'Process Component L5': 'CO01, CO40, CO41',
-	 'Mandatory Process': 'No',
-	 'S/4HANA Impact': 'Yes',
-	 'Default Status': 'C3M',
-	 'Query ID': 'PP-MAND-08',
-	 'Rule Set': 'QUERY',
-	 'Final Status': 'C2',
-	 'Overview of the Change in SAP S/4HANA': '',
-	 'Change Impact based on System Analysis': 'Minor Impact',
-	 'Process Group': '',
-	 'Impacted TCode': '',
-	 Observation: '' },
- */
+
 /**
  * Insert an SAP Client record
  *
@@ -98,9 +79,9 @@ const insertFunctionalAssesement = async  (clientId, funcAssesment) => {
 			ProcesGroupL1: funcAssesment['Process Group L1'],
 			Module: funcAssesment.Module,
 			ProcessScenarioL2: funcAssesment['Process Scenario L2'],
-			ProcessComponentL3: funcAssesment['Process  Component L3'],
-			ProcessComponentL4: funcAssesment['Process  Component L4'],
-			ProcessComponentL5: funcAssesment['Process  Component L5'],
+			ProcessComponentL3: funcAssesment['Process Component L3'],
+			ProcessComponentL4: funcAssesment['Process Component L4'],
+			ProcessComponentL5: funcAssesment['Process Component L5'],
 			MandatoryProcess: funcAssesment['Mandatory Process'],
 			S4HANAImpact: funcAssesment['S/4HANA Impact'],
 			DefaultStatus: funcAssesment['Default Status'],
@@ -108,7 +89,7 @@ const insertFunctionalAssesement = async  (clientId, funcAssesment) => {
 			RuleSet: funcAssesment['Rule Set'],
 			FinalStatus: funcAssesment['Final Status'],
 			OverviewChangeSAPS4HANA: funcAssesment['Overview of the Change in SAP S/4HANA'],
-			ChangeImpactBasedOnSysAnalysis: funcAssesment['Change Impact based on System Analysis'],
+			ChangeImpactBasedOnSystemAnalysis: funcAssesment['Change Impact based on System Analysis'],
 			ProcessGroup: funcAssesment['Process Group'],
 			ImpactedTCode: funcAssesment['Impacted TCode'],
 			Observation: funcAssesment['Observation']
