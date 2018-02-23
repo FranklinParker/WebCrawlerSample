@@ -75,14 +75,19 @@ const FunctionAssesment = sequelize.define('FunctionAssesment', {
  * @returns {Promise<any>}
  */
 var insertClient = async (client, records) => {
-	const seq = await sequelize.sync();
-	const clientNew = await
-		Client.create({
-			clientName: client.clientName,
-			clientCode: client.clientCode,
-			industryCode: client.industryCode
-		});
-	return clientNew;
+	try {
+		const seq = await sequelize.sync();
+		const clientNew = await
+			Client.create({
+				clientName: client.clientName,
+				clientCode: client.clientCode,
+				industryCode: client.industryCode
+			});
+		const faRecord = await insertFunctionalAssesement(clientNew.id, records[0]);
+		return clientNew;
+	}catch (e){
+		console.log('error creating client', e);
+	}
 
 }
 
