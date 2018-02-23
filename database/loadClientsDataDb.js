@@ -122,3 +122,11 @@ module.exports.sapClientSqlDb = {
 }
 
 
+
+
+FunctionAssesment.describe().then((result)=>{
+	console.log(result);
+	let keys =Object.keys(result);
+	keys.forEach((key)=> console.log('Column:' + key));
+
+});
