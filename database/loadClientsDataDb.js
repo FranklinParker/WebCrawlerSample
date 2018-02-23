@@ -25,6 +25,7 @@ const Client = sequelize.define('Client', {
 
 });
 
+
 const FunctionAssesment = sequelize.define('FunctionAssesment', {
 	//username: {type: Sequelize.STRING, unique: true},
 	clientId: Sequelize.BIGINT,
