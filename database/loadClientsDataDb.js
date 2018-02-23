@@ -28,23 +28,23 @@ const Client = sequelize.define('Client', {
 const FunctionAssesment = sequelize.define('FunctionAssesment', {
 	//username: {type: Sequelize.STRING, unique: true},
 	clientId: Sequelize.BIGINT,
-	ProcesGroupL1: Sequelize.STRING(100),
-	Module: Sequelize.STRING(100),
-	ProcessScenarioL2: Sequelize.STRING(100),
-	ProcessComponentL3: Sequelize.STRING(100),
-	ProcessComponentL4: Sequelize.STRING(100),
-	ProcessComponentL5: Sequelize.STRING(100),
-	MandatoryProcess: Sequelize.STRING(10),
-	S4HANAImpact: Sequelize.STRING(10),
-	DefaultStatus: Sequelize.STRING(10),
-	QueryID: Sequelize.STRING(15),
-	RuleSet: Sequelize.STRING(20),
-	FinalStatus: Sequelize.STRING(10),
-	OverviewChangeSAPS4HANA: Sequelize.STRING(100),
-	ChangeImpactBasedOnSystemAnalysis: Sequelize.STRING(30),
-	ProcessGroup: Sequelize.STRING(10),
-	ImpactedTCode: Sequelize.STRING(10),
-	Observation: Sequelize.STRING(50)
+	ProcesGroupL1: Sequelize.STRING(400),
+	Module: Sequelize.STRING(400),
+	ProcessScenarioL2: Sequelize.STRING(400),
+	ProcessComponentL3: Sequelize.STRING(400),
+	ProcessComponentL4: Sequelize.STRING(400),
+	ProcessComponentL5: Sequelize.STRING(400),
+	MandatoryProcess: Sequelize.STRING(400),
+	S4HANAImpact: Sequelize.STRING(400),
+	DefaultStatus: Sequelize.STRING(400),
+	QueryID: Sequelize.STRING(400),
+	RuleSet: Sequelize.STRING(400),
+	FinalStatus: Sequelize.STRING(400),
+	OverviewChangeSAPS4HANA: Sequelize.STRING(400),
+	ChangeImpactBasedOnSystemAnalysis: Sequelize.STRING(400),
+	ProcessGroup: Sequelize.STRING(400),
+	ImpactedTCode: Sequelize.STRING(400),
+	Observation: Sequelize.STRING(400)
 
 });
 
@@ -64,7 +64,10 @@ var insertClient = async (client, records) => {
 				clientCode: client.clientCode,
 				industryCode: client.industryCode
 			});
-		const faRecord = await insertFunctionalAssesement(clientNew.id, records[0]);
+		records.forEach(async (funcAssesRec)=>{
+			const faRecord = await insertFunctionalAssesement(clientNew.id, funcAssesRec);
+		});
+
 		return clientNew;
 	}catch (e){
 		console.log('error creating client', e);
