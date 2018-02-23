@@ -2,11 +2,11 @@ const clientDB = require('../database/loadClientsDataDb').sapClientSqlDb;
 const excelParser = require('../service/parseExcell').excelParser;
 
 
-const processFuncAssesmentClient = async (client, file, sheetName)=> {
+const processFuncAssesment = async (client, file, sheetName)=> {
 	 let functionalAssmentData = await excelParser
 		.processExcelToJson(
-			'/Users/franklinparker/outputFiles/ORANGE Functional Assessment Internal.xlsx',
-			'Core process Final Version');
+			file,
+			sheetName);
 		console.log('functionalAssmentData',functionalAssmentData);
 		console.log('functionalAssmentData.length',functionalAssmentData.length);
 		const clientNew = await clientDB.insertClient(client, functionalAssmentData);
@@ -15,15 +15,29 @@ const processFuncAssesmentClient = async (client, file, sheetName)=> {
 }
 
 
+const processSimplification = async (client, file, sheetName)=> {
+	let simplificationData = await excelParser
+		.processExcelToJson(
+			file,
+			sheetName);
+	console.log('simplification',simplificationData);
+	console.log('simplificationData.length',simplificationData.length);
+	//const clientNew = await clientDB.insertClient(client, functionalAssmentData);
+	//console.log('created client', clientNew);
 
-processFuncAssesmentClient(
+}
+
+
+
+
+processSimplification(
 	{
 		clientName: 'ORANGE',
 		clientCode: 'ORANGE',
 		industryCode: 'UNKNOWN'
 	},
-	'/Users/franklinparker/outputFiles/ORANGE Functional Assessment Internal.xlsx',
-	'Core process Final Version',
+	'/Users/franklinparker/outputFiles/ORANGE_SIMPLI.xlsx',
+	'simplification',
 
 );
 

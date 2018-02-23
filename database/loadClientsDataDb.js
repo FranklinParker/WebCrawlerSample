@@ -115,18 +115,30 @@ const findClientCount = async () => {
 	});
 }
 
+var getFunctAssementTableColumns = async () =>{
+	const tableDesc = await FunctionAssesment.describe();
+	const columns = Object.keys(tableDesc);
+	return columns;
+
+}
+
 
 module.exports.sapClientSqlDb = {
 	findClientCount,
 	insertClient
 }
 
+const testTableCols = async ()=>{
+	const tableCols = await getFunctAssementTableColumns();
+	console.log('cols', tableCols);
 
+}
 
+testTableCols();
 
-FunctionAssesment.describe().then((result)=>{
-	console.log(result);
-	let keys =Object.keys(result);
-	keys.forEach((key)=> console.log('Column:' + key));
-
-});
+// FunctionAssesment.describe().then((result)=>{
+// 	console.log(result);
+// 	let keys =Object.keys(result);
+// 	keys.forEach((key)=> console.log('Column:' + key));
+//
+// });
