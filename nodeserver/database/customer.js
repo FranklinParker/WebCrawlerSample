@@ -8,7 +8,7 @@ const Customer = sequelize.define('customer', {
 		//username: {type: Sequelize.STRING, unique: true},
 		name: {type: Sequelize.STRING, allowNull: false},
 		industry_code: Sequelize.STRING,
-	  client_code: Sequelize.STRING,
+		client_code: Sequelize.STRING,
 		geo_code: Sequelize.STRING
 
 	}, {
@@ -33,6 +33,37 @@ const addCustomer = async (customer) => {
 	return newCust.dataValues;
 }
 
+const getAllCustomers = async () => {
+	try {
+		const records = await Customer.findAll({order: sequelize.col('name')});
+		const customers = [];
+		records.forEach((customer) => {
+			const custDbRec = customer.dataValues;
+			customers.push({
+				name: custDbRec.name,
+				industryCode: custDbRec.industry_code,
+				clientCode: custDbRec.client_code,
+				geoCode: custDbRec.geo_code,
+
+			});
+		});
+
+		return customers;
+	} catch (e) {
+		throw e;
+	}
+}
+
+
+module.exports.customer = {
+	getAllCustomers
+}
+
+/***
+ * test an add
+ *
+ * @returns {Promise<void>}
+ */
 const testAdd = async () => {
 	const cust = await addCustomer(
 		{
@@ -44,4 +75,10 @@ const testAdd = async () => {
 	console.log('added', cust);
 }
 
-testAdd();
+const testGetAll = async ()=>{
+	const customers = await getAllCustomers();
+	console.log('customers', customers);
+
+}
+//testGetAll();
+//testAdd();
