@@ -1,0 +1,15 @@
+.customer-header{
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 16px;
+  color: White;
+  background-color: black;
+}
+.customer-row {
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 16px;
+  color: blue;
+}
