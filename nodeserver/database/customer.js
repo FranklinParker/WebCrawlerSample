@@ -8,7 +8,7 @@ const Customer = sequelize.define('customer', {
 		//username: {type: Sequelize.STRING, unique: true},
 		name: {type: Sequelize.STRING, allowNull: false},
 		industry_code: Sequelize.STRING,
-		client_code: Sequelize.STRING,
+		customer_code: Sequelize.STRING,
 		geo_code: Sequelize.STRING
 
 	}, {
@@ -26,7 +26,7 @@ const addCustomer = async (customer) => {
 	const newCust = await Customer.create({
 		name: customer.name,
 		industry_code: customer.industryCode,
-		client_code: customer.clientCode,
+		customer_code: customer.customerCode,
 		geo_code: customer.geoCode,
 	});
 	console.log('new customer');
@@ -42,7 +42,7 @@ const getAllCustomers = async () => {
 			customers.push({
 				name: custDbRec.name,
 				industryCode: custDbRec.industry_code,
-				clientCode: custDbRec.client_code,
+				customerCode: custDbRec.customer_code,
 				geoCode: custDbRec.geo_code,
 
 			});
@@ -69,7 +69,7 @@ const testAdd = async () => {
 		{
 			name: 'Test Delete',
 			industryCode: 'MANU',
-			clientCode: 'TEST',
+			customerCode: 'TEST',
 			geoCode: 'NE'
 		});
 	console.log('added', cust);
