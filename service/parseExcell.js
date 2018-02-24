@@ -1,6 +1,13 @@
 var XLSX = require('xlsx');
 
-
+/**
+ * Parses an excel sheet returning a json object with key (column header) value ( all other rows)
+ *
+ *
+ * @param file
+ * @param sheetToSelect
+ * @returns {Promise<void>}
+ */
 var processExcelToJson = async (file, sheetToSelect) => {
 	return new Promise(function (resolve, reject) {
 		var workbook = XLSX.readFile(file);
