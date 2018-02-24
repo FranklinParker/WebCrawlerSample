@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {SapModule} from "./sap/sap.module";
 import {AppRoutingModule} from "./app-routing.module";
+import {CustomerModule} from "./customer/customer.module";
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import {AppRoutingModule} from "./app-routing.module";
   imports: [
     BrowserModule,
     SapModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CustomerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
