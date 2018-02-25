@@ -9,6 +9,7 @@ import {Customer} from "../../../models/customer";
 })
 export class CustomerHomeComponent implements OnInit {
   customers: Customer[];
+  componentToShow = 'customers';
   constructor(private customerService: CustomerService) { }
 
   ngOnInit() {

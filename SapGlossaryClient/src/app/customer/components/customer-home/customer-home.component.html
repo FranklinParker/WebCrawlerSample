@@ -1,33 +1,45 @@
 <div class="container">
-  <div class="card card-header"><h3>Customers</h3></div>
-  <div class="row customer-header m-1" >
-    <div class="col-md-3">
-      Customer Name
-    </div>
-    <div class="col-md-3">
-      Customer Code
-    </div>
-    <div class="col-md-3">
-      Industry Code
-    </div>
-    <div class="col-md-3">
-      Geo Code
+  <div class="card card-header">
+    <div class="row">
+      <button class="btn btn-outline-primary btn-sm m-2"
+              (click)=" componentToShow='customer'">Show Customers</button>
+      <button class="btn btn-outline-primary btn-sm m-2"
+              (click)=" componentToShow='functionalAssessment'">
+             Functional Assessments</button>
     </div>
 
+  </div>
+  <div class="container-fluid" *ngIf="componentToShow==='customer'">
+    <div class="row customer-header m-1">
+      <div class="col-md-3">
+        Customer Name
+      </div>
+      <div class="col-md-3">
+        Customer Code
+      </div>
+      <div class="col-md-3">
+        Industry Code
+      </div>
+      <div class="col-md-3">
+        Geo Code
+      </div>
 
+
+    </div>
+    <div class="row customer-row m-1" *ngFor="let customer of customers">
+      <div class="col-md-3">
+        {{customer.name}}
+      </div>
+      <div class="col-md-3">
+        {{customer.customerCode}}
+      </div>
+      <div class="col-md-3">
+        {{customer.industryCode}}
+      </div>
+      <div class="col-md-3">
+        {{customer.geoCode}}
+      </div>
+    </div>
   </div>
-  <div class="row customer-row m-1" *ngFor="let customer of customers">
-    <div class="col-md-3">
-      {{customer.name}}
-    </div>
-    <div class="col-md-3">
-      {{customer.customerCode}}
-    </div>
-    <div class="col-md-3">
-      {{customer.industryCode}}
-    </div>
-    <div class="col-md-3">
-      {{customer.geoCode}}
-    </div>
-  </div>
+  <app-functional-assement-list *ngIf="componentToShow==='functionalAssessment'"></app-functional-assement-list>
 </div>

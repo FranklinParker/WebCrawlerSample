@@ -4,6 +4,7 @@ import {FormsModule} from "@angular/forms";
 import { CustomerHomeComponent } from './components/customer-home/customer-home.component';
 import {CustomerService} from "./service/customer.service";
 import {HttpClientModule} from "@angular/common/http";
+import { FunctionalAssementListComponent } from './components/functional-assement-list/functional-assement-list.component';
 
 @NgModule({
   imports: [
@@ -11,7 +12,7 @@ import {HttpClientModule} from "@angular/common/http";
     FormsModule,
     HttpClientModule
   ],
-  declarations: [CustomerHomeComponent],
+  declarations: [CustomerHomeComponent, FunctionalAssementListComponent],
   exports: [CustomerHomeComponent],
   providers: [CustomerService]
 })
