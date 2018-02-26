@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const funcAssesment = require('../database/FunctionalAssesment').functionalAssesment;
+const funcAssesment = require('../database/OutFunctionalAssesment').functionalAssesment;
 
 router.get('/getAll', async (req, res) => {
 	try {
