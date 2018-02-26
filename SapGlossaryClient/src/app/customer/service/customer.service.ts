@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
-import {SapGlossary} from "../../models/sap-glossary";
 import {Observable} from "rxjs/Observable";
 import {Customer} from "../../models/customer";
 import {FunctionalAssessment} from "../../models/functional-assessment";
