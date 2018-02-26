@@ -1,4 +1,4 @@
-const clientDB = require('../database/loadClientsDataDb').sapClientSqlDb;
+const customer = require('../nodeserver/database/customer').customer;
 const excelParser = require('../service/parseExcell').excelParser;
 
 
@@ -30,13 +30,14 @@ const processSimplification = async (client, file, sheetName)=> {
 
 
 
-processSimplification(
+processFuncAssesment(
+
 	{
 		clientName: 'ORANGE',
 		clientCode: 'ORANGE',
 		industryCode: 'UNKNOWN'
 	},
-	'/Users/franklinparker/outputFiles/ORANGE_SIMPLI.xlsx',
+	'/Users/franklinparker/outputFiles/ORANGE Functional Assessment Internal.xlsx',
 	'simplification',
 
 );

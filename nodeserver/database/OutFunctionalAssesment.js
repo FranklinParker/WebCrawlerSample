@@ -61,7 +61,7 @@ const insertFunctionalAssessment = async  ( funcAssessment) => {
 }
 
 const findFunctionalAssessmentCount = async () => {
-	return FunctionAssesment.findAll(
+	return OutFunctionAssessment.findAll(
 		{
 			attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'count_id']]
 		}).then((count) => {
@@ -74,7 +74,7 @@ const findFunctionalAssessmentCount = async () => {
 }
 
 const getAllFunctionalAssessments = async () => {
-	return FunctionAssesment.findAll(
+	return OutFunctionAssessment.findAll(
 		{
 
 		}).then((records) => {
@@ -102,7 +102,7 @@ module.exports.functionalAssesment = {
 
 
 const testGetAll = async ()=> {
-	const records = await getAllFunctionalAssesments();
+	const records = await getAllFunctionalAssessments();
 	console.log('records', records);
 }
 

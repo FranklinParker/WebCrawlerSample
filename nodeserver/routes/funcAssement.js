@@ -4,7 +4,7 @@ const funcAssesment = require('../database/OutFunctionalAssesment').functionalAs
 
 router.get('/getAll', async (req, res) => {
 	try {
-		const funcAssessRecords  = await funcAssesment.getAllFunctionalAssesments();
+		const funcAssessRecords  = await funcAssesment.getAllFunctionalAssessments();
 		res.status(200).json({
 			status: 'success',
 			records: funcAssessRecords

@@ -3,14 +3,6 @@ const Sequelize = require('sequelize');
 const sequelize = require('./connectionPostGres').connection;
 const Op = Sequelize.Op;
 
-// { id: 1,
-// 	name: 'cust',
-// 	c_code: 'c_code',
-// 	geo: 'geo',
-// 	description: 'desc',
-// 	created_at: null,
-// 	updated_at: null,
-// 	industry_code: 'indus' }
 const Customer = sequelize.define('customer', {
 		//username: {type: Sequelize.STRING, unique: true},
 	  id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
@@ -31,6 +23,13 @@ const Customer = sequelize.define('customer', {
 	}
 );
 
+/**
+ *
+ * add new customer record
+ *
+ * @param customer
+ * @returns {Promise<*|{}>}
+ */
 
 const addCustomer = async (customer) => {
 	const init = await  sequelize.sync();
@@ -42,9 +41,21 @@ const addCustomer = async (customer) => {
 		created_at: new Date(),
 		updated_at: new Date()
 	});
-	console.log('new customer');
+	console.log('new customer added');
 	return newCust.dataValues;
 }
+
+const findByCustomerName = async (customerName) =>{
+	const customer = await Customer.findAll({name: customerName});
+	if(customer && customer[0]){
+		return customer[0].dataValues;
+	} else{
+		return null;
+	}
+
+}
+
+
 
 const getAllCustomers = async () => {
 	try {
@@ -69,29 +80,8 @@ const getAllCustomers = async () => {
 
 
 module.exports.customer = {
-	getAllCustomers
+	getAllCustomers,
+	findByCustomerName,
+	addCustomer
 }
 
-/***
- * test an add
- *
- * @returns {Promise<void>}
- */
-const testAdd = async () => {
-	const cust = await addCustomer(
-		{
-			name: 'Test Delete',
-			industryCode: 'MANU',
-			customerCode: 'TEST',
-			geoCode: 'NE'
-		});
-	console.log('added', cust);
-}
-
-const testGetAll = async ()=>{
-	const customers = await getAllCustomers();
-	console.log('customers', customers);
-
-}
-//testGetAll();
-testAdd();
