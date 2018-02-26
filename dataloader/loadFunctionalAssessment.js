@@ -1,29 +1,36 @@
 const excelParser = require('../service/parseExcell').excelParser;
 const customerDb = require('../nodeserver/database/customer').customer;
+const outFunctionalAssessmentDb = require('../nodeserver/database/OutFunctionalAssesment').functionalAssesment;
 
 
+const loadOutFunctionalAssessment = async (customer, file, sheet) => {
 
-const loadOutFunctionalAssessment =  async (customer)=>{
-	let customerFound = await customerDb.findByCustomerName(customer.name);
-	console.log('found customer',customerFound);
-	if(!customerFound){
-		customer = await customerDb.addCustomer(customer);
-		console.log('added customer ', customer);
+	try {
+		let customerFound = await customerDb.findByCustomerName(customer.name);
+		console.log('found customer', customerFound);
+		if (!customerFound) {
+			customerFound = await customerDb.addCustomer(customer);
+			console.log('added customer ', customer);
+		}
+		const excelRecords = await excelParser.processExcelToJson(file, sheet);
+		excelRecords.forEach(async (funcAssesRec)=> {
+			funcAssesRec.customer_id = customerFound.id;
+			const result = await outFunctionalAssessmentDb.addOutFunctionalAssessment(funcAssesRec);
+		});
+
+	}catch (e){
+		console.log('err',e);
 	}
-	// const cust = await addCustomer(
-	// 	{
-	// 		name: 'Test Delete',
-	// 		industryCode: 'MANU',
-	// 		customerCode: 'TEST',
-	// 		geoCode: 'NE'
-	// 	});
 
 }
 
 loadOutFunctionalAssessment({
-	name: 'Customer',
-	industryCode: 'NA',
-	customerCode:'CUST',
-	geoCode:'UK',
+		name: 'Customer',
+		industryCode: 'NA',
+		customerCode: 'CUST',
+		geoCode: 'UK',
 
-});
+	},
+	'/Users/franklinparker/outputFiles/ORANGE Functional Assessment Internal.xlsx',
+	'Core process Final Version',
+);

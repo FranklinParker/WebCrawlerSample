@@ -40,7 +40,7 @@ const OutFunctionAssessment = sequelize.define('OutFunctionAssessment', {
 
 
 
-const insertFunctionalAssessment = async  ( funcAssessment) => {
+const addOutFunctionalAssessment = async  ( funcAssessment) => {
 	const funcAsses =OutFunctionAssessment.create({
 			customer_id: funcAssessment.customer_id,
 			process_group_l1: funcAssessment.process_group_l1,
@@ -50,6 +50,8 @@ const insertFunctionalAssessment = async  ( funcAssessment) => {
 			process_component_l4: funcAssessment.process_component_l4,
 			s4hana_impact: funcAssessment.s4hana_impact,
 			overview_change: funcAssessment.overview_change,
+		  default_status: funcAssessment.default_status,
+			final_status: funcAssessment.final_status,
 			change_impact_system_analysis:funcAssessment.change_impact_system_analysis,
 			process_group: funcAssessment.process_group,
 			impacted_tcode: funcAssessment.impacted_tcode
@@ -81,9 +83,6 @@ const getAllFunctionalAssessments = async () => {
 			const functionalAssesments = [];
 			records.forEach((record) => functionalAssesments.push(record.dataValues));
 			return functionalAssesments;
-
-
-
 	});
 }
 
@@ -97,7 +96,8 @@ var getFunctAssessmentTableColumns = async () =>{
 
 module.exports.functionalAssesment = {
 	findFunctionalAssessmentCount,
-	getAllFunctionalAssessments
+	getAllFunctionalAssessments,
+	addOutFunctionalAssessment
 }
 
 
@@ -113,25 +113,6 @@ const testTableCols = async ()=>{
 }
 
 
-const testInsert = async ()=>{
-	const record =  await insertFunctionalAssessment({
-		customer_id: 1,
-		process_group_l1: 'pgl1',
-		module:  'mod',
-		process_scenario_l2:  'ps1',
-		process_component_l3: 'pc3',
-		process_component_l4: 'pc4',
-		s4hana_impact: false,
-		overview_change: 'overview_change',
-		change_impact_system_analysis:'change_impact_system_analysis',
-		process_group: 'process_group',
-		impacted_tcode: 'impacted_tcode'
-	});
-	console.log('record', record);
-
-}
-
-testInsert();
 
 //testGetAll();
 
