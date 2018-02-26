@@ -5,6 +5,7 @@ const sequelize = new Sequelize('compose', 'admin', 'ARJKDCRVIPIGPLAG', {
 	host: 'sl-us-south-1-portal.20.dblayer.com',
 	dialect: 'postgres',
 	port: 34751,
+	schema: 's4hana',
 	logging: false,
 
 	pool: {

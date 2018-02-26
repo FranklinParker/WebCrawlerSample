@@ -3,13 +3,24 @@ const Sequelize = require('sequelize');
 const sequelize = require('./connectionPostGres').connection;
 const Op = Sequelize.Op;
 
-
+// { id: 1,
+// 	name: 'cust',
+// 	c_code: 'c_code',
+// 	geo: 'geo',
+// 	description: 'desc',
+// 	created_at: null,
+// 	updated_at: null,
+// 	industry_code: 'indus' }
 const Customer = sequelize.define('customer', {
 		//username: {type: Sequelize.STRING, unique: true},
+	  id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
 		name: {type: Sequelize.STRING, allowNull: false},
 		industry_code: Sequelize.STRING,
-		customer_code: Sequelize.STRING,
-		geo_code: Sequelize.STRING
+		cust_code: Sequelize.STRING,
+		geo_code: Sequelize.STRING,
+		created_at: Sequelize.DATE,
+		updated_at: Sequelize.DATE
+
 
 	}, {
 		// don't add the timestamp attributes (updatedAt, createdAt)
@@ -26,8 +37,10 @@ const addCustomer = async (customer) => {
 	const newCust = await Customer.create({
 		name: customer.name,
 		industry_code: customer.industryCode,
-		customer_code: customer.customerCode,
+		cust_code: customer.customerCode,
 		geo_code: customer.geoCode,
+		created_at: new Date(),
+		updated_at: new Date()
 	});
 	console.log('new customer');
 	return newCust.dataValues;
@@ -81,4 +94,4 @@ const testGetAll = async ()=>{
 
 }
 //testGetAll();
-//testAdd();
+testAdd();

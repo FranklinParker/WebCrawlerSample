@@ -36,6 +36,9 @@ const createUser = async ()=>{
 		console.log(' error', e);''
 	}
 }
+sequelize.query("select * from s4hana.customer", { type: sequelize.QueryTypes.SELECT})
+	.then(customers => {
+		console.log(customers);
+	})
 
-createUser();
-
+//createUser();
