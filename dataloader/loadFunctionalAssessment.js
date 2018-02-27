@@ -26,12 +26,12 @@ const loadOutFunctionalAssessment = async (customer, file, sheet) => {
 }
 
 loadOutFunctionalAssessment({
-		name: 'Orange',
+		name: 'Rede Records',
 		industryCode: 'NA',
-		customerCode: 'Blue',
+		customerCode: 'Rede Records',
 		geoCode: 'UK',
 
 	},
-	'/Users/franklinparker/outputFiles/ORANGE Functional Assessment Internal.xlsx',
+	'Rede Records Functional Assessment Internal.xlsx',
 	'Core process Final Version',
 );
