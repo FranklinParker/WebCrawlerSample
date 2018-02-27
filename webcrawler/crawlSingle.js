@@ -1,8 +1,8 @@
 var Crawler = require("simplecrawler");
-const htmlParser = require('./webcrawler/parsingSap').htmlParser;
+const htmlParser = require('./parsingSap').htmlParser;
 const fs = require('fs');
 //const sapGlossryDb = require('./database/cloudant').sapGlossaryDB;
-const {sapGlossarySqlDb } = require('./database/sapGlossSql');
+const {sapGlossarySqlDb } = require('../database/sapGlossSql');
 
 
 const sapGlosRecords = [];
@@ -61,7 +61,7 @@ crawler.on("fetchcomplete", function (queueItem, responseBuffer, response) {
 
 crawler.on('complete', () => {
 	console.log('done');
-	const sapGlossDB = require('./database/cloudant');
+	const sapGlossDB = require('../database/cloudant');
 
 	logToFile(JSON.stringify(sapGlosRecords, null, 2));
 

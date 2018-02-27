@@ -10,9 +10,12 @@ const saveOutFunctionalAssessmentToFile = (fileOut) => {
 		.then((functionalAss) => {
 
 			console.log("number records:" + functionalAss.length);
-			fs.appendFile(fileOut, JSON.stringify(functionalAss,null,2), (err) => {
-				if (err) throw err;
-				console.log('The "data to append" was appended to file!');
+			functionalAss.forEach((record) => {
+				fs.appendFile(fileOut + record.id + '.json', JSON.stringify(record, null, 2), (err) => {
+					if (err) throw err;
+					console.log('The "data to append" was appended to file!');
+				});
+
 			});
 
 
@@ -20,4 +23,4 @@ const saveOutFunctionalAssessmentToFile = (fileOut) => {
 }
 
 
-saveOutFunctionalAssessmentToFile('/Users/franklinparker/jsonForWatson/customerFuncAssessment.json');
+saveOutFunctionalAssessmentToFile('/Users/franklinparker/jsonForWatson/funcAssessRecordId');

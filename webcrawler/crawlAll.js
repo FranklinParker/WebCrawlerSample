@@ -1,7 +1,7 @@
 var Crawler = require("simplecrawler");
-const htmlParser = require('./webcrawler/parsingSap').htmlParser;
+const htmlParser = require('./parsingSap').htmlParser;
 const fs = require('fs');
-const {sapGlossarySqlDb} = require('./database/sapGlossSql');
+const {sapGlossarySqlDb} = require('../database/sapGlossSql');
 
 
 const sapGlosRecords = [];
