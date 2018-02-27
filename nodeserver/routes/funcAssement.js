@@ -18,7 +18,26 @@ router.get('/getAll', async (req, res) => {
 		});
 
 	}
+});
 
+
+router.get('/getByCustomer/:customerId', async (req, res) => {
+	const customerId = req.params.customerId;
+	try {
+		const funcAssessRecords  = await funcAssesment.getFunctionalAssessmentsByCustomer(customerId);
+		res.status(200).json({
+			status: 'success',
+			records: funcAssessRecords
+
+		});
+	} catch (e) {
+		res.status(200).json({
+			status: 'error',
+			message: 'error getting function asses'
+
+		});
+
+	}
 });
 
 

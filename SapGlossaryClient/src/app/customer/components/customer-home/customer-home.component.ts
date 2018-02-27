@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CustomerService} from "../../service/customer.service";
 import {Customer} from "../../../models/customer";
 
@@ -10,11 +10,17 @@ import {Customer} from "../../../models/customer";
 export class CustomerHomeComponent implements OnInit {
   customers: Customer[];
   componentToShow = 'customers';
-  constructor(private customerService: CustomerService) { }
+
+  constructor(private customerService: CustomerService) {
+  }
 
   ngOnInit() {
     this.customerService.getAllCustomers()
-      .subscribe((customers)=> this.customers = customers);
+      .subscribe((customers) => {
+        this.customers = customers;
+        console.log('customers', this.customers);
+
+      });
   }
 
 }

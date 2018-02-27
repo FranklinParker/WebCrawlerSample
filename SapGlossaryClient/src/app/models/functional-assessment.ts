@@ -1,6 +1,8 @@
+import {Customer} from "./customer";
+
 export interface FunctionalAssessment {
   id: number;
-  customerId?:number;
+  customer?: Customer;
   ProcesGroupL1?: string;
   Module?: string;
   ProcessScenarioL2?: string;

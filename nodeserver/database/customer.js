@@ -69,9 +69,10 @@ const getAllCustomers = async () => {
 		records.forEach((customer) => {
 			const custDbRec = customer.dataValues;
 			customers.push({
+				id: custDbRec.id,
 				name: custDbRec.name,
 				industryCode: custDbRec.industry_code,
-				customerCode: custDbRec.customer_code,
+				customerCode: custDbRec.cust_code,
 				geoCode: custDbRec.geo_code,
 
 			});

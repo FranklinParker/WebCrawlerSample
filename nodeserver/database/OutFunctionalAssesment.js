@@ -88,6 +88,18 @@ const getAllFunctionalAssessments = async () => {
 	});
 }
 
+const getFunctionalAssessmentsByCustomer = async (customerId) => {
+	return OutFunctionAssessment.findAll({
+			where: {
+				customer_id: customerId
+			}
+		}).then((records) => {
+		const functionalAssesments = [];
+		records.forEach((record) => functionalAssesments.push(record.dataValues));
+		return functionalAssesments;
+	});
+}
+
 var getFunctAssessmentTableColumns = async () =>{
 	const tableDesc = await FunctionAssesment.describe();
 	const columns = Object.keys(tableDesc);
@@ -99,14 +111,10 @@ var getFunctAssessmentTableColumns = async () =>{
 module.exports.functionalAssesment = {
 	findFunctionalAssessmentCount,
 	getAllFunctionalAssessments,
+	getFunctionalAssessmentsByCustomer,
 	addOutFunctionalAssessment
 }
 
-
-const testGetAll = async ()=> {
-	const records = await getAllFunctionalAssessments();
-	console.log('records', records);
-}
 
 const testTableCols = async ()=>{
 	const tableCols = await getFunctAssessmentTableColumns();
@@ -116,6 +124,3 @@ const testTableCols = async ()=>{
 
 
 
-//testGetAll();
-
-//testTableCols();
