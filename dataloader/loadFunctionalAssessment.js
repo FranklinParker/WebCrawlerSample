@@ -25,9 +25,9 @@ const loadOutFunctionalAssessment = async (customer, file, sheet) => {
 }
 
 loadOutFunctionalAssessment({
-		name: 'Customer',
+		name: 'Orange',
 		industryCode: 'NA',
-		customerCode: 'CUST',
+		customerCode: 'ORANGE',
 		geoCode: 'UK',
 
 	},

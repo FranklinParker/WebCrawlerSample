@@ -26,6 +26,8 @@ const OutFunctionAssessment = sequelize.define('OutFunctionAssessment', {
 	process_component_l4: Sequelize.STRING,
 	s4hana_impact: Sequelize.BOOLEAN,
 	overview_change: Sequelize.TEXT,
+	default_status: Sequelize.TEXT,
+	final_status: Sequelize.TEXT,
 	change_impact_system_analysis: Sequelize.STRING,
 	process_group: Sequelize.STRING,
 	impacted_tcode: Sequelize.STRING,
@@ -44,7 +46,7 @@ const addOutFunctionalAssessment = async  ( funcAssessment) => {
 	const funcAsses =OutFunctionAssessment.create({
 			customer_id: funcAssessment.customer_id,
 			process_group_l1: funcAssessment.process_group_l1,
-			module:  funcAssessment.module,
+			module:  funcAssessment.module_name,
 			process_scenario_l2:  funcAssessment.process_scenario_l2,
 			process_component_l3: funcAssessment.process_component_l3,
 			process_component_l4: funcAssessment.process_component_l4,
