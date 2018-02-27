@@ -32,7 +32,7 @@ const Customer = sequelize.define('customer', {
  */
 
 const addCustomer = async (customer) => {
-	const init = await  sequelize.sync();
+	console.log('adding customer:' + customer.name);
 	const newCust = await Customer.create({
 		name: customer.name,
 		industry_code: customer.industryCode,
@@ -46,7 +46,12 @@ const addCustomer = async (customer) => {
 }
 
 const findByCustomerName = async (customerName) =>{
-	const customer = await Customer.findAll({name: customerName});
+	console.log(' findByCustomerName:' + customerName);
+	const customer = await Customer.findAll({
+		where: {
+			name: customerName
+		}
+	});
 	if(customer && customer[0]){
 		return customer[0].dataValues;
 	} else{

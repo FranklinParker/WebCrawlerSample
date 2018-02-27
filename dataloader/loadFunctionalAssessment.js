@@ -6,6 +6,7 @@ const outFunctionalAssessmentDb = require('../nodeserver/database/OutFunctionalA
 const loadOutFunctionalAssessment = async (customer, file, sheet) => {
 
 	try {
+
 		let customerFound = await customerDb.findByCustomerName(customer.name);
 		console.log('found customer', customerFound);
 		if (!customerFound) {
@@ -27,7 +28,7 @@ const loadOutFunctionalAssessment = async (customer, file, sheet) => {
 loadOutFunctionalAssessment({
 		name: 'Orange',
 		industryCode: 'NA',
-		customerCode: 'ORANGE',
+		customerCode: 'Blue',
 		geoCode: 'UK',
 
 	},
