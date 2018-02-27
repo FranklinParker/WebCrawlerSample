@@ -1,0 +1,18 @@
+.customer-row {
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 16px;
+  color: blue;
+}
+
+
+.customer-row-selected {
+  border: 2px solid blue;
+  background-color: lightgreen;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 16px;
+  color: red;
+
+}

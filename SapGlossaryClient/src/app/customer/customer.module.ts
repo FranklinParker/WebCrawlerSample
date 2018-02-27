@@ -5,6 +5,7 @@ import { CustomerHomeComponent } from './components/customer-home/customer-home.
 import {CustomerService} from "./service/customer.service";
 import {HttpClientModule} from "@angular/common/http";
 import { FunctionalAssementListComponent } from './components/functional-assement-list/functional-assement-list.component';
+import { CustomerDetailComponent } from './components/customer-detail/customer-detail.component';
 
 @NgModule({
   imports: [
@@ -12,7 +13,7 @@ import { FunctionalAssementListComponent } from './components/functional-assemen
     FormsModule,
     HttpClientModule
   ],
-  declarations: [CustomerHomeComponent, FunctionalAssementListComponent],
+  declarations: [CustomerHomeComponent, FunctionalAssementListComponent, CustomerDetailComponent],
   exports: [CustomerHomeComponent],
   providers: [CustomerService]
 })

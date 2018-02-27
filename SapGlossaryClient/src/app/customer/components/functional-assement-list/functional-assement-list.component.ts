@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {CustomerService} from "../../service/customer.service";
 import {FunctionalAssessment} from "../../../models/functional-assessment";
 
@@ -8,15 +8,13 @@ import {FunctionalAssessment} from "../../../models/functional-assessment";
   styleUrls: ['./functional-assement-list.component.css']
 })
 export class FunctionalAssementListComponent implements OnInit {
-  functionalAssessments: FunctionalAssessment[] = [];
+  @Input('functionalAssessments') functionalAssessments: FunctionalAssessment[] = [];
 
-  constructor(private customerService: CustomerService) { }
+
+  constructor() { }
 
   ngOnInit() {
-    this.customerService.getAllFunctionalAssessments()
-      .subscribe((records : FunctionalAssessment[])=>{
-        this.functionalAssessments = records;
-      })
+
   }
 
 }
