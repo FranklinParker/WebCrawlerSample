@@ -53,8 +53,8 @@ const addOutFunctionalAssessment = async  ( funcAssessment) => {
 			process_component_l3: funcAssessment.process_component_l3,
 			process_component_l4: funcAssessment.process_component_l4,
 			process_component_l5: funcAssessment.process_component_l5,
-			mandatory_process: funcAssessment.mandatory_process,
-			s4hana_impact: funcAssessment.s4hana_impact,
+			mandatory_process: getBoolean(funcAssessment.mandatory_process),
+			s4hana_impact: getBoolean(funcAssessment.s4hana_impact),
 			overview_change: funcAssessment.overview_change,
 		  default_status: funcAssessment.default_status,
 			final_status: funcAssessment.final_status,
@@ -66,6 +66,10 @@ const addOutFunctionalAssessment = async  ( funcAssessment) => {
 	);
 	return funcAsses;
 
+}
+
+const getBoolean = (boolStr)=>{
+	return boolStr && boolStr!==''? boolStr: false;
 }
 
 const findFunctionalAssessmentCount = async () => {
