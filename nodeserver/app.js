@@ -11,6 +11,7 @@ const sapApi = require('./routes/sap');
 const sapHelpApi = require('./routes/sapHelp');
 const customers = require('./routes/customers');
 const funcAssesment = require('./routes/funcAssement');
+const fileUpload = require('./routes/file');
 
 
 var app = express();
@@ -39,6 +40,8 @@ app.use('/api/sap', sapApi);
 app.use('/api/saphelp', sapHelpApi);
 app.use('/api/customers', customers);
 app.use('/api/functionalAssessments', funcAssesment);
+app.use('/api/fileUpload', fileUpload);
+
 
 
 // catch 404 and forward to error handler
