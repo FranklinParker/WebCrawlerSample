@@ -1,0 +1,40 @@
+<div class="card m-2">
+  <div class="card-header">
+    <h2>Select File</h2>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="upload">Upload File</label>
+          <input type="file" name="upload" id="upload" class="form-control"
+                 (change)="handleFileInput($event.target.files)">
+        </div>
+      </div>
+    </div>
+    <div  *ngIf="mimeTypeExcel">
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="sheetName">Select Sheet</label>
+            <select id="sheetName" name="sheetName" [(ngModel)]="selectedSheet">
+              <option *ngFor="let sheetName of excelSheetNames" value="{{sheetName}}">{{sheetName}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-primary" type="button" (click)="parseExcel()">Parse </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <div class="row">
+      <div class="col">
+        <label>Mime type: {{file && file.type?file.type:' None Selected'}}</label>
+      </div>
+    </div>
+  </div>
+</div>
