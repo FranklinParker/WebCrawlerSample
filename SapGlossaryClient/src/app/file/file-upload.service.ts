@@ -17,7 +17,11 @@ export class FileUploadService {
 
   }
 
-
+  /**
+   * for excel get sheet names
+   * @param {File} file
+   * @returns {Observable<any>}
+   */
   getSheetNames(file: File): Observable<any> {
     const formData = new FormData();
     formData.append('file', file);
@@ -25,6 +29,13 @@ export class FileUploadService {
 
   }
 
+  /**
+   * for excell parse file
+   *
+   * @param {File} file
+   * @param {string} sheetName
+   * @returns {Observable<Object>}
+   */
   parseExcel(file:File, sheetName:string){
     const formData = new FormData();
     formData.append('file', file);

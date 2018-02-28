@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var multer = require('multer');
 const fs = require('fs');
-const upload = multer({dest: '../public/images'});
+const upload = multer({dest: './public/images'});
 const mimeTypesExcel = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
 	'application/vnd.ms-excel'];
 
@@ -22,7 +22,6 @@ router.post('/parseExcel', upload.single('file'), function (req, res, next) {
 		.then((data) => {
 				if(data.length>maxRows ){
 					data = data.slice(0,maxRows);
-					console.log('sliced:',  data);
 				}
 
 				res.send({message: `File Type ${req.file.mimetype} Parsed`, data: data});
@@ -39,7 +38,6 @@ router.post('/getExcelSheets', upload.single('file'), function (req, res, next) 
 	if (mimeTypeExcel) {
 		parser.getExcelSheetNames(req.file.path)
 			.then((sheetNames) => {
-					console.log('found sheetNames', sheetNames);
 					res.send({
 						message: `File Type ${req.file.mimetype} Sheet Names`,
 						result: 'success',

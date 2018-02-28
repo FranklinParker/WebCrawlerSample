@@ -14,7 +14,7 @@ export class FileUploadComponent implements OnInit {
     ,'application/vnd.ms-excel'];
 
   constructor(private fileUploadService: FileUploadService){
-    
+
   }
 
   ngOnInit() {
@@ -39,7 +39,8 @@ export class FileUploadComponent implements OnInit {
   parseExcel() {
     this.fileUploadService.parseExcel(this.file, this.selectedSheet)
       .subscribe((resp) => {
-
+        console.log('parse result',
+          resp);
       });
   }
 
