@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FileUploadService} from "../../file-upload.service";
 import {CustomerService} from "../../../customer/service/customer.service";
 import {Customer} from "../../../models/customer";
+
+
+interface FileType {
+  code: string;
+  description: string;
+}
 
 @Component({
   selector: 'app-file-upload',
@@ -10,22 +16,30 @@ import {Customer} from "../../../models/customer";
 })
 export class FileUploadComponent implements OnInit {
   file: File;
+  fileTypeCode: string;
   excelSheetNames = [];
   selectedSheet: string;
-  customers: Customer[]= [];
   customerId: number;
+  customers: Customer[] = [];
+  fileTypes: FileType[] = [
+    {
+      code: 'out_func_assessment',
+      description: 'Functional Assessment Output'
+    }
+  ]
+
   mimeTypesExcel = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-    ,'application/vnd.ms-excel'];
+    , 'application/vnd.ms-excel'];
 
   constructor(private fileUploadService: FileUploadService,
-              private customerService: CustomerService){
+              private customerService: CustomerService) {
 
 
   }
 
   ngOnInit() {
     this.customerService.getAllCustomers()
-      .subscribe((customers: Customer[])=>{
+      .subscribe((customers: Customer[]) => {
         this.customers = customers;
       })
 
@@ -39,7 +53,6 @@ export class FileUploadComponent implements OnInit {
    */
   handleFileInput(files: FileList) {
     this.file = files.item(0);
-    console.log('file change', this.file);
     if (this.mimeTypeExcel) {
       this.getSheetNames();
 
@@ -47,6 +60,11 @@ export class FileUploadComponent implements OnInit {
   }
 
   parseExcel() {
+    console.log('fileTypeCode:'+ this.fileTypeCode);
+    console.log('customerId:'+ this.customerId);
+
+
+
     this.fileUploadService.parseExcel(this.file, this.selectedSheet)
       .subscribe((resp) => {
         console.log('parse result',
@@ -65,7 +83,7 @@ export class FileUploadComponent implements OnInit {
   }
 
   /**
-   *
+   * get the sheet names for an excell file
    *
    */
   getSheetNames() {
@@ -85,11 +103,11 @@ export class FileUploadComponent implements OnInit {
 
   }
 
-  isMimeTypeExcel(){
-    if(!this.file){
+  isMimeTypeExcel() {
+    if (!this.file) {
       return false;
     }
-    const typeExcelFound = this.mimeTypesExcel.find((type) => type ===this.file.type );
+    const typeExcelFound = this.mimeTypesExcel.find((type) => type === this.file.type);
     return typeExcelFound;
 
   }

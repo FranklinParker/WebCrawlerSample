@@ -7,8 +7,18 @@
       <div class="col">
         <div class="form-group">
           <label for="customer">Customer:</label>
-          <select id="customer" name="sheetName" [(ngModel)]="customerId">
+          <select id="customer" name="customer" [(ngModel)]="customerId">
             <option *ngFor="let cust of customers" value="{{cust.id}}">{{cust.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="fileType">File Type:</label>
+          <select id="fileType" name="file" [(ngModel)]="fileTypeCode">
+            <option *ngFor="let fileType of fileTypes" value="{{fileType.code}}">{{fileType.description}}</option>
           </select>
         </div>
       </div>
