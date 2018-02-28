@@ -7,7 +7,7 @@
       <div class="col">
         <div class="form-group">
           <label for="customer">Customer:</label>
-          <select id="customer" name="customer" [(ngModel)]="customerId">
+          <select id="customer" name="customer" [(ngModel)]="customerId" class="form-control-sm mx-1 px-2">
             <option *ngFor="let cust of customers" value="{{cust.id}}">{{cust.name}}</option>
           </select>
         </div>
@@ -17,7 +17,7 @@
       <div class="col">
         <div class="form-group">
           <label for="fileType">File Type:</label>
-          <select id="fileType" name="file" [(ngModel)]="fileTypeCode">
+          <select id="fileType" name="file" [(ngModel)]="fileTypeCode" class="form-control-sm mx-1 px-2">
             <option *ngFor="let fileType of fileTypes" value="{{fileType.code}}">{{fileType.description}}</option>
           </select>
         </div>
