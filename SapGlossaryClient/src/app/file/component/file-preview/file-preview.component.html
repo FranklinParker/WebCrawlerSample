@@ -1,6 +1,6 @@
 <div class="container-fluid m-1">
-  <table class="table table-striped">
-    <thead *ngIf="fileResults">
+  <table class="table table-striped" *ngIf="fileResults">
+    <thead >
       <tr>
         <th class="th-header"
             *ngFor="let colName of fileResults.columnsToView">
@@ -8,5 +8,14 @@
         </th>
       </tr>
     </thead>
+    <tbody>
+      <tr *ngFor="let record of fileResults.records">
+        <td class="tr-row"
+            *ngFor="let colName of fileResults.columnsToView">
+          {{record[colName]}}
+        </td>
+
+      </tr>
+    </tbody>
   </table>
 </div>
