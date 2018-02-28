@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FileUploadService} from "../../file-upload.service";
+import {CustomerService} from "../../../customer/service/customer.service";
+import {Customer} from "../../../models/customer";
 
 @Component({
   selector: 'app-file-upload',
@@ -10,14 +12,22 @@ export class FileUploadComponent implements OnInit {
   file: File;
   excelSheetNames = [];
   selectedSheet: string;
+  customers: Customer[]= [];
+  customerId: number;
   mimeTypesExcel = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     ,'application/vnd.ms-excel'];
 
-  constructor(private fileUploadService: FileUploadService){
+  constructor(private fileUploadService: FileUploadService,
+              private customerService: CustomerService){
+
 
   }
 
   ngOnInit() {
+    this.customerService.getAllCustomers()
+      .subscribe((customers: Customer[])=>{
+        this.customers = customers;
+      })
 
 
   }

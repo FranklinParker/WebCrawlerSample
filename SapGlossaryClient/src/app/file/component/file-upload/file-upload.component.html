@@ -6,6 +6,16 @@
     <div class="row">
       <div class="col">
         <div class="form-group">
+          <label for="customer">Customer:</label>
+          <select id="customer" name="sheetName" [(ngModel)]="customerId">
+            <option *ngFor="let cust of customers" value="{{cust.id}}">{{cust.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
           <label for="upload">Upload File</label>
           <input type="file" name="upload" id="upload" class="form-control"
                  (change)="handleFileInput($event.target.files)">
