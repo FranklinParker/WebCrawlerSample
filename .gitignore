@@ -2,7 +2,8 @@
 .idea/
 .idea/workspace.xml
 /nodeserver/node_modules
-/nodeserver/public/images
+
+public/images
 
 
 .idea/workspace.xml
