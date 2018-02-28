@@ -26,12 +26,12 @@ const loadOutFunctionalAssessment = async (customer, file, sheet) => {
 }
 
 loadOutFunctionalAssessment({
-		name: 'ABBVIE',
+		name: 'DSG',
 		industryCode: 'NA',
-		customerCode: 'ABBVIE',
+		customerCode: 'DSG',
 		geoCode: 'UK',
 
 	},
-	'/Users/franklinparker/outputFiles/Rede Records Functional Assessment Internal.xlsx',
+	'/Users/franklinparker/outputFiles/DSG Functional Assessment Internal.xlsx',
 	'Core process Final Version',
 );
