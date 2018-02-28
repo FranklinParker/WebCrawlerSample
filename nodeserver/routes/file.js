@@ -15,7 +15,6 @@ const parser = require('../services/parser').parsers;
  */
 
 router.post('/parseExcel', upload.single('file'), function (req, res, next) {
-	console.log('req.file', req.file);
 	const sheetName = req.body.sheetName;
 	const maxRows = excelSettings.maxRecords;
 	parser.processExcelToJson(req.file.path, sheetName)

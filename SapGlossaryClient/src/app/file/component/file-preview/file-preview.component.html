@@ -1,0 +1,12 @@
+<div class="container-fluid m-1">
+  <table class="table table-striped">
+    <thead *ngIf="fileResults">
+      <tr>
+        <th class="th-header"
+            *ngFor="let colName of fileResults.columnsToView">
+          {{colName}}
+        </th>
+      </tr>
+    </thead>
+  </table>
+</div>

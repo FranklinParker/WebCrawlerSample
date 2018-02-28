@@ -9,12 +9,14 @@ import {CustomerModule} from "./customer/customer.module";
 import { FileUploadComponent } from './file/component/file-upload/file-upload.component';
 import {FileUploadService} from "./file/file-upload.service";
 import {FormsModule} from "@angular/forms";
+import { FilePreviewComponent } from './file/component/file-preview/file-preview.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    FilePreviewComponent
   ],
   imports: [
     BrowserModule,
