@@ -100,12 +100,13 @@ export class FileUploadComponent implements OnInit {
    *
    */
   uploadFile() {
-    if (this.file) {
-      this.fileUploadService.uploadFile(this.file).subscribe((resp) => {
+    if (this.file && this.selectedSheet && this.customerId) {
+      this.fileUploadService.uploadFile(this.file,this.selectedSheet, this.customerId)
+        .subscribe((resp) => {
         console.log('upload ', resp);
       });
     } else {
-      alert('Please select a file');
+      alert('Please select a file, customer and sheet');
     }
   }
 

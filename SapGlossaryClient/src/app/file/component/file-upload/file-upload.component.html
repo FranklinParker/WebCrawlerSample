@@ -43,9 +43,12 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col">
+      <div *ngIf="mimeTypeExcel" class="row">
+        <div class="col mx-2">
           <button class="btn btn-primary" type="button" (click)="parseExcel()">Preview </button>
+        </div>
+        <div class="col mx-2">
+          <button class="btn btn-primary" type="button" (click)="uploadFile()">Upload </button>
         </div>
       </div>
     </div>

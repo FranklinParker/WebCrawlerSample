@@ -60,6 +60,19 @@ const findByCustomerName = async (customerName) =>{
 
 }
 
+const findById = async (id) =>{
+	const customer = await Customer.findAll({
+		where: {
+			id: id
+		}
+	});
+	if(customer && customer[0]){
+		return customer[0].dataValues;
+	} else{
+		return null;
+	}
+
+}
 
 
 const getAllCustomers = async () => {
@@ -88,6 +101,7 @@ const getAllCustomers = async () => {
 module.exports.customer = {
 	getAllCustomers,
 	findByCustomerName,
-	addCustomer
+	addCustomer,
+	findById
 }
 

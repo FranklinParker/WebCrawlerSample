@@ -98,10 +98,10 @@ const getAllFunctionalAssessments = async () => {
 
 const getFunctionalAssessmentsByCustomer = async (customerId) => {
 	return OutFunctionAssessment.findAll({
-			where: {
-				customer_id: customerId
-			}
-		}).then((records) => {
+		where: {
+			customer_id: customerId
+		}
+	}).then((records) => {
 		const functionalAssesments = [];
 		records.forEach((record) => functionalAssesments.push(record.dataValues));
 		return functionalAssesments;
