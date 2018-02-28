@@ -23,7 +23,7 @@ var getExcelSheetNames = (file) => {
 };
 
 
-module.exports.parsers = {
+module.exports.excellParser = {
 	processExcelToJson,
 	getExcelSheetNames
 };

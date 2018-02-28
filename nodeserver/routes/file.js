@@ -8,7 +8,7 @@ const mimeTypesExcel = ['application/vnd.openxmlformats-officedocument.spreadshe
 	'application/vnd.ms-excel'];
 
 const excelSettings = require('../config/config').excelParse;
-const parser = require('../services/parser').parsers;
+const excellparser = require('../services/excellParser').excellParser;
 
 /**
  * parses an excel file
@@ -18,7 +18,7 @@ const parser = require('../services/parser').parsers;
 router.post('/parseExcel', upload.single('file'), function (req, res, next) {
 	const sheetName = req.body.sheetName;
 	const maxRows = excelSettings.maxRecords;
-	parser.processExcelToJson(req.file.path, sheetName)
+	excellparser.processExcelToJson(req.file.path, sheetName)
 		.then((data) => {
 				if(data.length>maxRows ){
 					data = data.slice(0,maxRows);
@@ -42,7 +42,7 @@ router.post('/upload', upload.single('file'), async (req, res, next) =>{
 	const sheetName = req.body.sheetName;
 	const customerId = req.body.customerId;
 	try{
-		const records = await parser.processExcelToJson(req.file.path, sheetName);
+		const records = await excellparser.processExcelToJson(req.file.path, sheetName);
 		const customer = await  customerDB.findById(customerId);
 		records.forEach(async (rec) =>{
 			rec.customer_id = customer.id;
@@ -66,7 +66,7 @@ router.post('/upload', upload.single('file'), async (req, res, next) =>{
 router.post('/getExcelSheets', upload.single('file'), function (req, res, next) {
 	const mimeTypeExcel = mimeTypesExcel.find(mime => mime === req.file.mimetype);
 	if (mimeTypeExcel) {
-		parser.getExcelSheetNames(req.file.path)
+		excellparser.getExcelSheetNames(req.file.path)
 			.then((sheetNames) => {
 					res.send({
 						message: `File Type ${req.file.mimetype} Sheet Names`,
