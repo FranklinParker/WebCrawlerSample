@@ -1,19 +1,21 @@
 <div class="container">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th> Proces Group L1</th>
-        <th>Module</th>
-        <th>Process Scenario L2</th>
-      </tr>
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th> Proces Group L1</th>
+          <th>Module</th>
+          <th>Process Scenario L2</th>
+        </tr>
 
-    </thead>
-    <tbody>
-      <tr *ngFor="let functionalAssessment of functionalAssessments">
-        <td>{{functionalAssessment.ProcesGroupL1}}</td>
-        <td>{{functionalAssessment.Module}}</td>
-        <td>{{functionalAssessment.ProcessScenarioL2}}</td>
-      </tr>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <tr *ngFor="let functionalAssessment of functionalAssessments">
+          <td>{{functionalAssessment.ProcesGroupL1}}</td>
+          <td>{{functionalAssessment.Module}}</td>
+          <td>{{functionalAssessment.ProcessScenarioL2}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -3,15 +3,9 @@ import {FileUploadService} from "../../file-upload.service";
 import {CustomerService} from "../../../customer/service/customer.service";
 import {Customer} from "../../../models/customer";
 import {FileResults} from "../../../models/file-results";
+import {FileType} from "../../../models/file-type";
 
 
-interface FileType {
-  code: string;
-  description: string;
-  previewColumns: string[];
-
-
-}
 
 @Component({
   selector: 'app-file-upload',
@@ -26,18 +20,7 @@ export class FileUploadComponent implements OnInit {
   customerId: number;
   fileResults: FileResults;
   customers: Customer[] = [];
-  fileTypes: FileType[] = [
-    {
-      code: 'out_func_assessment',
-      description: 'Functional Assessment Output',
-      previewColumns : ['process_group_l1','module',
-        'process_scenario_l2','process_component_l3',
-        'process_component_l4','process_component_l5',
-        'change_impact_system_analysis'
-      ]
-    }
-  ];
-
+  fileTypes: FileType[];
 
 
   mimeTypesExcel = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
@@ -55,7 +38,12 @@ export class FileUploadComponent implements OnInit {
     this.customerService.getAllCustomers()
       .subscribe((customers: Customer[]) => {
         this.customers = customers;
-      })
+      });
+    this.fileUploadService.getFileTypes()
+      .subscribe((fileTypes: FileType[])=>{
+        this.fileTypes = fileTypes;
+        console.log('got file types', this.fileTypes);
+    });
   }
 
   /**
