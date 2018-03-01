@@ -65,15 +65,15 @@ export class FileUploadComponent implements OnInit {
    *
    */
   parseExcel() {
-    console.log('fileTypeCode:'+ this.fileTypeCode);
-    console.log('customerId:'+ this.customerId);
     if(!this.fileTypeCode){
       alert('You select a file type');
       return;
     }
     this.fileUploadService.parseExcel(this.file, this.selectedSheet)
       .subscribe((resp) => {
-        const columnsToShow = this.fileTypes.find((fileType)=> fileType.code === this.fileTypeCode).previewColumns;
+        const columnsToShow = this.fileTypes.find((fileType)=>
+          fileType.code === this.fileTypeCode).previewColumns;
+        console.log('columnsToShow', columnsToShow);
         this.fileResults ={
           records: resp['data'],
           columnsToView: columnsToShow
