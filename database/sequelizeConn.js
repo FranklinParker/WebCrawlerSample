@@ -1,9 +1,9 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('compose', 'admin', 'ARJKDCRVIPIGPLAG', {
-	host: 'sl-us-south-1-portal.20.dblayer.com',
+const sequelize = new Sequelize('database', 'user', 'password', {
+	host: 'url',
 	dialect: 'postgres',
 	port: 34751,
-	schema: 's4hana',
+	schema: 'schema',
 	logging: false,
 
 
